@@ -15,3 +15,27 @@
 hr{
     color: red;
 }
+
+/*Book zone*/
+.main-book{
+    margin-top:50px;
+    display: flex;
+    height: 800px;
+}
+.filter-zone{
+    text-align: center;
+    width: 450px;
+    border-right: red dashed 1px;
+}
+.book-zone{
+    margin-left: 40px;
+}
+.card{
+    height: 400px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-bottom: 10px;
+}
+.title-books{
+    display: flex;
+}
