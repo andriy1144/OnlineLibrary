@@ -1,5 +1,5 @@
 /*Blocks style config*/
-.navbar, .footer{
+.navbar{
     background-color: lightcoral;
 }
 .navbar .navbar-brand{
@@ -11,7 +11,7 @@
 .navbar-collapse {
     justify-content: end;
 }
-.footer{
-    margin-top: -50px;
-    height: 50px;
+/*Heder configurer*/
+hr{
+    color: red;
 }
