@@ -39,3 +39,8 @@ hr{
 .title-books{
     display: flex;
 }
+
+/*Contact li*/
+.contact-li:hover{
+    color: blue;
+}

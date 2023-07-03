@@ -17,4 +17,8 @@ public class MainPageController {
         return "mainPage";
     }
 
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "aboutPage";
+    }
 }
