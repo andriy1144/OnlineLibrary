@@ -34,13 +34,7 @@ hr{
     height: 400px;
     margin-right: 10px;
     margin-bottom: 10px;
-    margin-bottom: 10px;
 }
 .title-books{
     display: flex;
-}
-
-/*Contact li*/
-.contact-li:hover{
-    color: blue;
 }
