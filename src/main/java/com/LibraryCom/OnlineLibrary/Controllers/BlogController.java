@@ -24,6 +24,8 @@ public class BlogController {
 
         return "blogPage";
     }
-
-
+    @GetMapping("/addBlog")
+    public String addBlogPage(){
+        return "addBlogPage";
+    }
 }
