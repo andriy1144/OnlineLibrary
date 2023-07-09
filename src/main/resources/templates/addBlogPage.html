@@ -14,7 +14,7 @@
 
   <!--Send form-->
   <div class="container mt-5">
-    <form method="post" action="/blog/">
+    <form method="post" action="/blog/savePost" enctype="multipart/form-data">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Заголовок</label>
         <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="Заголовок">
@@ -31,7 +31,7 @@
           <input class="form-control" name="files" type="file" id="formFileMultiple" multiple>
         </div>
       </div>
-      <button type="button" class="btn btn-success">Success</button>
+      <button type="submit" class="btn btn-success">Success</button>
     </form>
   </div>
 

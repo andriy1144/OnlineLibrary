@@ -39,4 +39,8 @@ public class Posts {
     private void init(){
         dateOfCreating = new Date();
     }
+
+    public void addImage(Images image){
+        imagesList.add(image);
+    }
 }

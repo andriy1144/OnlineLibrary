@@ -32,4 +32,9 @@ public class Images {
 
     @Column(name = "isPreviewImage")
     private Boolean isPreviewImage;
+
+    @PrePersist
+    private void init(){
+        isPreviewImage = false;
+    }
 }
