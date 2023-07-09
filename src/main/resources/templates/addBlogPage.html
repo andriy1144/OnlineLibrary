@@ -14,7 +14,7 @@
 
   <!--Send form-->
   <div class="container mt-5">
-    <form method="post" action="/">
+    <form method="post" action="/blog/">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Заголовок</label>
         <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="Заголовок">
@@ -23,8 +23,19 @@
         <label for="exampleFormControlTextarea1" class="form-label">Опис</label>
         <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
+      <button id="buttonInputer" onclick="addMoreInputer()" type="button" class="btn btn-primary mb-3">Add More Inputer</button>
+      <div id="fileInputer">
+        <div class="mb-3">
+          <label for="formFileMultiple" class="form-label">File 1</label>
+          <p> The firstone image will be <strong>preview</strong></p>
+          <input class="form-control" name="files" type="file" id="formFileMultiple" multiple>
+        </div>
+      </div>
       <button type="button" class="btn btn-success">Success</button>
     </form>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" th:src="@{https://code.jquery.com/jquery-3.7.0.min.js}" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script th:src="@{/static/js/script.js}" src="/static/js/script.js"></script>
 </body>
 </html>
