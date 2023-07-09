@@ -14,6 +14,7 @@ public class OnlineLibraryApplication {
 		SpringApplication.run(OnlineLibraryApplication.class, args);
 
 		logger.info("--Application has succesfully started--");
+		logger.info("--Databases has been succesfuly conected--");
 	}
 
 }

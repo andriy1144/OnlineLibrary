@@ -28,4 +28,5 @@ public class BlogController {
     public String addBlogPage(){
         return "addBlogPage";
     }
+
 }
