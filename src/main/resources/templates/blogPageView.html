@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Онлайн Бібліотека</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css}" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65}" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/style.css" th:href="@{/static/css/style.css}">
+</head>
+<body>
+
+<header th:insert="~{blocks/header :: header}"></header>
+
+<div class="container mt-5" th:object="${post}">
+  <div style="display: flex">
+    <h1 th:text="${post.getTitle()}"/>
+    <p class="ms-5" style="margin-left: 600px; margin-top: 20px;color: brown" th:text="${#temporals.format(post.getDateOfCreating(),'dd-MM-yyyy HH:mm')}"/>
+  </div>
+  <p class="mt-5" th:text="${post.getDescription()}"/>
+  <div th:each=" image : ${post.getImagesList()}">
+    <img height="300px" width="300px" th:src=" ' /images/ ' + ${image.getId()}" alt="image">
+  </div>
+</div>
+
+</body>
+</html>

@@ -17,16 +17,16 @@
 
   <div class="album py-5 bg-light">
     <div class="container">
-
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div th:each="post : ${Posts}" class="card mb-4 box-shadow" style="width: 18rem;">
             <img th:src=" '/images/' + ${post.getPreviewImageId()}" class="card-img-top" alt="previewImage">
             <div class="card-body">
               <h5 class="card-title" th:text="${post.getTitle()}"/>
               <p class="card-text" th:unless="${post.getDescription().length() >= 25}" th:text="${post.getDescription()}"/>
-              <p class="card-text" th:if="${post.getDescription().length() >= 25}" th:text="${post.getDescription()}"/>
+              <p class="card-text" th:if="${post.getDescription().length() >= 25}" th:text="${post.getDescription().substring(0,155)} + '...' "/>
               <a th:href="'/blog/blogPreview/' + ${post.getId()}" class="btn btn-primary">Більше...</a>
+              <a th:if="${isAdmin}" th:href="'/blog/PostDelete/' + ${post.getId()}" class="btn btn-danger">Видалити пост</a>
             </div>
           </div>
         </div>

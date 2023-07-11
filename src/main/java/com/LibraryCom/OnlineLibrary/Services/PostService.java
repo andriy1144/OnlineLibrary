@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -54,5 +55,21 @@ public class PostService {
         }else{
             throw new IOException();
         }
+    }
+
+    public List<Posts> findAllPosts(){
+        return postsRepo.findAll();
+    }
+
+    public Posts findPostById(Long id){
+        Posts post = postsRepo.findById(id).orElse(null);
+        if(post != null){
+            return post;
+        }
+        return null;
+    }
+
+    public void deletePostById(Long id){
+        postsRepo.deleteById(id);
     }
 }
