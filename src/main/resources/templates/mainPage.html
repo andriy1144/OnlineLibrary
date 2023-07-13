@@ -27,9 +27,10 @@
         <div class="title-books">
             <h1 style="padding-left: 50px">Книги</h1>
             <form class="d-flex" style="margin-left: 60px" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2" id="floatingInput" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            <a style="margin-left: 40px; padding-top: 13px" href="/book/addNewBook" th:if="${isAdmin}" class="btn btn-primary">--Додати нову книгу--</a>
         </div>
         <div class="main-book">
             <div class="filter-zone">
@@ -47,6 +48,7 @@
             </div>
         </div>
     </div>
+
 
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js}" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
