@@ -24,7 +24,7 @@
             <div class="card-body">
               <h5 class="card-title" th:text="${post.getTitle()}"/>
               <p class="card-text" th:unless="${post.getDescription().length() >= 25}" th:text="${post.getDescription()}"/>
-              <p class="card-text" th:if="${post.getDescription().length() >= 25}" th:text="${post.getDescription().substring(0,155)} + '...' "/>
+              <p class="card-text" th:if="${post.getDescription().length() >= 155}" th:text="${post.getDescription().substring(0,155)} + '...' "/>
               <a th:href="'/blog/blogPreview/' + ${post.getId()}" class="btn btn-primary">Більше...</a>
               <a th:if="${isAdmin}" th:href="'/blog/PostDelete/' + ${post.getId()}" class="btn btn-danger">Видалити пост</a>
             </div>
