@@ -14,14 +14,17 @@
 
   <!--Send form-->
   <div class="container mt-5">
-    <form method="post" action="/blog/savePost" enctype="multipart/form-data">
+    <form method="post" action="/blog/savePost" enctype="multipart/form-data" onsubmit="return validate(this)">
       <div class="form-floating mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Заголовок</label>
-        <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="Заголовок">
+        <input type="text" class="form-control" name="title" id="floatingInput" placeholder="Заголовок">
+        <label for="floatingInput">Заголовок</label>
       </div>
       <div class="form-floating mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Опис</label>
-        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea class="form-control" name="description" placeholder="Опис" id="floatingTextarea2" ></textarea>
+        <label for="floatingTextarea2">Опис</label>
+      </div>
+      <div id="validMessage">
+
       </div>
       <button id="buttonInputer" onclick="addMoreInputer()" type="button" class="btn btn-primary mb-3">Add More Inputer</button>
       <div id="fileInputer">
@@ -37,5 +40,6 @@
 
   <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js}" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
   <script th:src="@{/static/js/script.js}" src="/static/js/script.js"></script>
+  <script th:src="@{/static/js/validation.js}" src="/static/js/validation.js"></script>
 </body>
 </html>
