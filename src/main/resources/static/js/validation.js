@@ -1,6 +1,6 @@
 const validMessageBlock = document.getElementById("validMessage");
 
-function validate(el) {
+function validateForm(el) {
     let title = el.title.value;
     let desc = el.description.value;
 
@@ -26,5 +26,16 @@ function validate(el) {
         }else{
             return false;
         }
+    }
+}
+
+function validateInput(el){
+    let smt = el.newGenre.value;
+
+    if(smt === ""){
+        alert("--Введіть щось у полу добавлення жанру спершу ніж відправляти--")
+        return false;
+    }else{
+        return true;
     }
 }

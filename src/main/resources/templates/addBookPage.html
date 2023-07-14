@@ -28,28 +28,10 @@
       <div class="mb-3" style="border: 1px solid grey; padding: 15px; border-radius: 15px">
         <h5>Жанри книги</h5>
 
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="genres" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Пригодницька література
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="genres" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Наукова література
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="genres" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Художня література
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox"  name="genres" value="" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Психологія
+        <div th:each="genre : ${Genres}" class="form-check">
+          <input class="form-check-input" type="checkbox" name="genres" th:value="${genre.getGenre()}" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault" th:text="${genre.getGenre()}">
+
           </label>
         </div>
       </div>
