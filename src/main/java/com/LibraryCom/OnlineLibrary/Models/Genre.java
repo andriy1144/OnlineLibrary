@@ -16,12 +16,13 @@ import java.util.Set;
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
+    //Create many to many relation with Book Table
     @ManyToMany(fetch = FetchType.EAGER,
         cascade = {
                 CascadeType.MERGE
@@ -29,6 +30,14 @@ public class Genre {
             mappedBy = "genres")
     @JsonIgnore
     private Set<Book> books = new HashSet<>();
+
+    //Special methos which will launh when we will remove object
+    @PreRemove
+    private void removeGenre(){
+        for(Book book : this.books){
+            book.removeGenre(this.getId());
+        }
+    }
 
     public Genre(){
 
