@@ -41,18 +41,19 @@
                 </form>
                 <h4 style="color: green;" th:text="${messageGenre}"></h4>
                 <div th:each="genre : ${Genres}" class="form-check" style="margin-left: 20px">
-                    <input class="form-check-input" type="checkbox" name="genreCheck" th:value="${genre.getGenre()}" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault" th:text="${genre.getGenre()}">
+                    <input class="form-check-input" type="checkbox" name="genreCheck" th:value="${genre.getName()}" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault" th:text="${genre.getName()}">
 
                     </label><a style="margin-left:10px; color: red" th:href="'/deleteFilter/' + ${genre.getId()}">Видалити</a>
                 </div>
             </div>
             <div class="book-zone row col-md-40">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                <div th:each="Book : ${Books}" class="card" style="width: 18rem;">
+                    <img th:src=" '/images/'  + ${Book.getImagesList().get(0).getId()}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 th:text="${Book.getName()}" class="card-title"/>
+                        <p class="card-text" th:text="${Book.getDescription().substring(0,155)} + '...' " th:if="${Book.getDescription().length() >= 155}"></p>
+                        <p class="card-text" th:text="${Book.getDescription()}" th:unless="${Book.getDescription().length() >= 155}"></p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>

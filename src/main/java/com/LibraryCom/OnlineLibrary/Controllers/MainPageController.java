@@ -5,12 +5,9 @@ import com.LibraryCom.OnlineLibrary.Services.BookService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.SQLIntegrityConstraintViolationException;
 
 @Controller
 @AllArgsConstructor
@@ -26,6 +23,7 @@ public class MainPageController {
         attributes : {
             model.addAttribute("isAdmin", true);
             model.addAttribute("Genres", bookService.getAllGenres());
+            model.addAttribute("Books",bookService.getAllBooks());
         }
         return "mainPage";
     }

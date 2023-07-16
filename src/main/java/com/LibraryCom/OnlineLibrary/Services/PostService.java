@@ -43,7 +43,7 @@ public class PostService {
         log.info("--New post has been created id : {} , imagesList-size: {}, Time: {}", posts.getId(),posts.getImagesList().size(),posts.getDateOfCreating());
     }
 
-    private Images toImage(MultipartFile file) throws IOException {
+    public static Images toImage(MultipartFile file) throws IOException {
         if(file.getSize() != 0){
             Images image = new Images();
             image.setName(file.getName());

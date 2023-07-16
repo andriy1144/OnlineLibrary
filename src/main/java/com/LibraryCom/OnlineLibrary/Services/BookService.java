@@ -1,11 +1,16 @@
 package com.LibraryCom.OnlineLibrary.Services;
 
+import com.LibraryCom.OnlineLibrary.Models.Book;
 import com.LibraryCom.OnlineLibrary.Models.Genre;
-import com.LibraryCom.OnlineLibrary.Repositories.GenreContainerRepository;
+import com.LibraryCom.OnlineLibrary.Models.Images;
+import com.LibraryCom.OnlineLibrary.Repositories.BookRepo;
+import com.LibraryCom.OnlineLibrary.Repositories.GenreRepo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -13,27 +18,59 @@ import java.util.List;
 @Slf4j
 public class BookService {
 
-    private final GenreContainerRepository genreContainerRepository;
+    private final GenreRepo genreRepo;
+    private final BookRepo bookRepo;
 
     /*
        -------------------GENRES SECTION------------------
     */
     public boolean addNewGenre(String genre){
-        List<Genre> genres = genreContainerRepository.findAll();
+        List<Genre> genres = genreRepo.findAll();
         Genre newGenre = new Genre(genre);
-        try {
-            genreContainerRepository.save(newGenre);
-            return true;
-        }catch (Exception e){
-            return false;
+        for (Genre g : genres){
+            if(g.getName().equals(newGenre.getName())){
+                return false;
+            }
         }
+        genreRepo.save(newGenre);
+        return true;
     }
 
     public List<Genre> getAllGenres(){
-        return genreContainerRepository.findAll();
+        return genreRepo.findAll();
     }
 
     public void deleteGenre(Long id){
-        genreContainerRepository.deleteById(id);
+        genreRepo.deleteById(id);
+    }
+
+    private Genre findGenreByName(String name){
+        return genreRepo.findGenreByName(name);
+    }
+    /*
+    ---------------------------------BOOK SECTION-------------------------
+    */
+
+    public void addNewBook(Book book, MultipartFile[] files,String[] genres) throws IOException {
+        for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
+                Images img = PostService.toImage(file);
+                book.addImage(img);
+            }
+        }
+        for (String genre : genres) {
+            Genre gnr = findGenreByName(genre);
+            System.out.println(gnr.getName());
+            book.addGenre(gnr);
+        }
+
+        System.out.println(book.getGenres());
+        System.out.println(book.getFeatures());
+        bookRepo.save(book);
+        log.info("-- Saved new book with id : {}, name: {}, genreListSize : {} , imagesListSize : {}",book.getId(),book.getName(),book.getGenres().size(),book.getImagesList().size());
+    }
+
+    public List<Book> getAllBooks(){
+        return bookRepo.findAll();
     }
 }
