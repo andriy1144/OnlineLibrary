@@ -5,13 +5,17 @@ import com.LibraryCom.OnlineLibrary.Models.Genre;
 import com.LibraryCom.OnlineLibrary.Models.Images;
 import com.LibraryCom.OnlineLibrary.Repositories.BookRepo;
 import com.LibraryCom.OnlineLibrary.Repositories.GenreRepo;
+import jakarta.persistence.NoResultException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.yaml.snakeyaml.util.EnumUtils;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -64,13 +68,15 @@ public class BookService {
             book.addGenre(gnr);
         }
 
-        System.out.println(book.getGenres());
-        System.out.println(book.getFeatures());
         bookRepo.save(book);
         log.info("-- Saved new book with id : {}, name: {}, genreListSize : {} , imagesListSize : {}",book.getId(),book.getName(),book.getGenres().size(),book.getImagesList().size());
     }
 
     public List<Book> getAllBooks(){
         return bookRepo.findAll();
+    }
+    public Book getBookById(Long id){
+        Book requiredBook = bookRepo.findById(id).orElse(null);
+        return requiredBook != null ? requiredBook : null;
     }
 }

@@ -28,6 +28,9 @@ public class Book {
     @OneToMany(targetEntity = Images.class,fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Images> imagesList = new ArrayList<>();
 
+    @Column(name = "author")
+    private String author;
+
     @Column(name = "isTaken")
     private boolean isTaken;
 

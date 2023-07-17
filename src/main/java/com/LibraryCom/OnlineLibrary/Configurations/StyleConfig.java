@@ -8,6 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //Spring MVC configurer
 @Configuration
 public class StyleConfig implements WebMvcConfigurer {
+    /*
+        Adding the resource handler to let see the spring our css's and js's files
+    */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");

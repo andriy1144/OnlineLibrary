@@ -71,5 +71,6 @@ public class PostService {
 
     public void deletePostById(Long id){
         postsRepo.deleteById(id);
+        log.info("--Post with id {} was deleted--",id);
     }
 }

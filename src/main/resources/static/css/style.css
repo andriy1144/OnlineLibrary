@@ -1,6 +1,6 @@
 /*Blocks style config*/
 .navbar{
-    background-color: lightcoral;
+    background-color: cyan;
 }
 .navbar .navbar-brand{
     font-size: 35px;
@@ -13,7 +13,7 @@
 }
 /*Heder configurer*/
 hr{
-    color: red;
+    color: cyan;
 }
 
 /*Book zone*/
@@ -25,7 +25,7 @@ hr{
 .filter-zone{
     text-align: center;
     width: 450px;
-    border-right: red dashed 1px;
+    border-right: blue dashed 1px;
 }
 .book-zone{
     margin-left: 40px;

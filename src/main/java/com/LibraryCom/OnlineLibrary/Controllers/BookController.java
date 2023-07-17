@@ -6,11 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.model.IModel;
 
 import java.io.IOException;
 
@@ -38,6 +36,16 @@ public class BookController {
         bookService.addNewBook(book,files,genres);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/{id}")
+    public String viewBook(@PathVariable(name = "id") Long id,Model model){
+        Book book = bookService.getBookById(id);
+
+        //Add atribute to the page
+        model.addAttribute("book",book);
+
+        return "bookViewPage";
     }
 
 }

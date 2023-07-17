@@ -27,6 +27,10 @@ public class MainPageController {
         }
         return "mainPage";
     }
+
+    /*
+                        GENRE SECTION
+    */
     @PostMapping("/")
     public String mainPagePost(@RequestParam(name = "genre") String genre, Model model) {
         if (genre != null) {
@@ -44,6 +48,9 @@ public class MainPageController {
         bookService.deleteGenre(id);
         return "redirect:/";
     }
+    /*
+                       END GENRE SECTION
+    */
 
     @GetMapping("/about")
     public String aboutPage() {

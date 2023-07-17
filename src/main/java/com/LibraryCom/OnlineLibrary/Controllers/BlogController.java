@@ -66,8 +66,6 @@ public class BlogController {
     public String deletePost(@PathVariable(name = "id") Long id){
         //Deleting post by id
         postService.deletePostById(id);
-
-        logger.info("--Post with id {} was deleted--",id);
         return "redirect:/blog/";
     }
 }
