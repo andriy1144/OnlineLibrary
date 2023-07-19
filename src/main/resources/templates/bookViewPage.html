@@ -35,6 +35,10 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td scope="row" >Жанри</td>
+                    <td style="text-align: center" class="table-active"> <span th:each="genre : ${book.getGenres()}" th:text="${genre.getName()} + ';'"></span></td>
+                </tr>
                 <tr th:each="feture : ${book.getFeatures()}">
                     <td scope="row" th:text='${feture.split("=")[0]}'></td>
                     <td style="text-align: center" class="table-active" th:text='${feture.split("=")[1]}'></td>

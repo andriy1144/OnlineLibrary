@@ -38,7 +38,7 @@ public class Book {
     private List<String> features;
 
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.MERGE
             })
