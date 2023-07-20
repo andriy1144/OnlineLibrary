@@ -26,26 +26,27 @@
     <div class="books-catalog mt-10">
         <div class="title-books">
             <h1 style="padding-left: 50px">Книги</h1>
-            <form class="d-flex" style="margin-left: 60px" role="search">
-                <input class="form-control me-2" id="floatingInput" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
             <a style="margin-left: 40px; padding-top: 13px" href="/book/addNewBook" th:if="${isAdmin}" class="btn btn-primary">--Додати нову книгу--</a>
         </div>
         <div class="main-book">
             <div class="filter-zone">
                 <h4 style="padding-left: 20px">Жанри</h4>
-                <form th:id ="${isAdmin}" class="d-flex container mt-3" onsubmit="return validateInput(this)" method="post">
+                <form th:if="${isAdmin}" action="/addNewGenre" class="d-flex container mt-3" onsubmit="return validateInput(this)" method="post">
                     <input class="form-control me-2" name="genre" id="floatingInput" type="text" placeholder="Жанр">
                     <button class="btn btn-outline-success" type="submit">Добавити</button>
                 </form>
-                <h4 style="color: green;" th:text="${messageGenre}"></h4>
-                <div th:each="genre : ${Genres}" class="form-check" style="margin-left: 20px">
-                    <input class="form-check-input" type="checkbox" name="genreCheck" th:value="${genre.getName()}" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault" th:text="${genre.getName()}">
+                <form style="margin-left: 15px;margin-top: 30px" method="post" action="/search">
+                    <div style="display: flex;margin-bottom: 20px">
+                        <input style="width: 320px" class="form-control me-2" name="title" id="floatingInput" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </div>
+                    <div th:each="genre : ${Genres}" class="form-check" style="margin-left: 20px">
+                        <input class="form-check-input" type="checkbox" name="genreCheck" th:value="${genre.getName()}" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault" th:text="${genre.getName()}">
 
-                    </label><a style="margin-left:10px; color: red" th:href="'/deleteFilter/' + ${genre.getId()}">Видалити</a>
-                </div>
+                        </label><a style="margin-left:10px; color: red" th:href="'/deleteFilter/' + ${genre.getId()}">Видалити</a>
+                    </div>
+                </form>
             </div>
             <div class="book-zone row col-md-40">
                 <div th:each="Book : ${Books}" class="card" style="width: 18rem;  height: 500px">

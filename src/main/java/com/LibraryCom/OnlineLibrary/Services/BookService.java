@@ -13,8 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.yaml.snakeyaml.util.EnumUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -78,5 +80,18 @@ public class BookService {
     public Book getBookById(Long id){
         Book requiredBook = bookRepo.findById(id).orElse(null);
         return requiredBook != null ? requiredBook : null;
+    }
+
+    public List<Book> seacrhBook(String title,String[] genres){
+        List<Book> result;
+        if(genres != null) {
+            Set<Genre> genresSet = Arrays.stream(genres).map(genreRepo::findGenreByName).collect(Collectors.toSet());
+            Set<Book> bookWithGenres = bookRepo.findAllByGenresIn(genresSet);
+            result = bookWithGenres.stream().filter( b -> b.getName().toLowerCase().startsWith(title)).toList();
+        }else{
+            List<Book> books = bookRepo.findAll();
+            result = books.stream().filter(b -> b.getName().toLowerCase().startsWith(title)).toList();
+        }
+        return result;
     }
 }
