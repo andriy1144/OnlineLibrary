@@ -1,8 +1,11 @@
 package com.LibraryCom.OnlineLibrary.Controllers;
 
 import com.LibraryCom.OnlineLibrary.Models.Posts;
+import com.LibraryCom.OnlineLibrary.Models.User;
+import com.LibraryCom.OnlineLibrary.Models.enums.Role;
 import com.LibraryCom.OnlineLibrary.Repositories.PostsRepo;
 import com.LibraryCom.OnlineLibrary.Services.PostService;
+import com.LibraryCom.OnlineLibrary.Services.userServices.UserService;
 import lombok.AllArgsConstructor;
 import org.hibernate.mapping.List;
 import org.slf4j.Logger;
@@ -13,6 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.channels.Pipe;
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/blog")
 @AllArgsConstructor
@@ -21,26 +27,33 @@ public class BlogController {
     //Required variables
     private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
     private final PostService postService;
-
+    private final UserService userService;
 
     //Controllers
     @GetMapping("/")
-    public String blogPage(Model model){
+    public String blogPage(Model model, Principal principal){
+        User user = userService.findUserByPrincipal(principal);
 
         attributes :{
-            model.addAttribute("isAdmin",true);
+            model.addAttribute("isAdmin",user.getRoleSet().contains(Role.ADMIN_ROLE));
+            model.addAttribute("user",user);
             model.addAttribute("Posts",postService.findAllPosts());
         }
 
         return "blogPage";
     }
     @GetMapping("/addBlog")
-    public String addBlogPage(){
+    public String addBlogPage(Principal principal,Model model){
+        User user = userService.findUserByPrincipal(principal);
+
+        model.addAttribute("user",user);
+
         return "addBlogPage";
     }
 
     @PostMapping("/savePost")
     public String postAddBlogPage(Posts posts, @RequestParam(name = "files") MultipartFile[] files){
+
         try {
             postService.savePost(posts, files);
         }catch(Exception e){
@@ -51,7 +64,11 @@ public class BlogController {
     }
 
     @GetMapping("/blogPreview/{id}")
-    public String blogPageView(@PathVariable(name = "id") Long id, Model model){
+    public String blogPageView(@PathVariable(name = "id") Long id, Model model,
+                               Principal principal){
+        User user = userService.findUserByPrincipal(principal);
+
+
         //Finding post by id
         Posts post = postService.findPostById(id);
         if(post != null){
@@ -59,6 +76,8 @@ public class BlogController {
         }else{
             ///Something...
         }
+
+        model.addAttribute("user",user);
         return "blogPageView";
     }
 

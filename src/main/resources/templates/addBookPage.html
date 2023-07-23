@@ -48,6 +48,7 @@
           <input class="form-control" name="files" type="file" id="formFileMultiple" multiple>
         </div>
       </div>
+      <input type="hidden" name="_csrf" th:value="${_csrf.token}">
       <button type="submit" class="btn btn-success ">Success</button>
     </form>
   </div>
