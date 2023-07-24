@@ -20,10 +20,7 @@ public class UserService {
 
     public void createUser(User user){
         user.setActive(false);
-<<<<<<< HEAD
         user.getRoleSet().add(Role.USER_ROLE);
-=======
->>>>>>> b061dc22030ebb4867d59e66480a7d1405564a4f
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
 

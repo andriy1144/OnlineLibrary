@@ -43,6 +43,12 @@ public class User implements UserDetails {
     private Set<Role> roleSet = new HashSet<>();
 
 
+    //Responses relation
+    @OneToMany(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.ALL},fetch = FetchType.LAZY)
+    private Set<Response> responseSet = new HashSet<>();
+
+
+    //User Details implementation
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roleSet;

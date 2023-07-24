@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Онлайн Бібліотека</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css}" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65}" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/style.css" th:href="@{/static/css/style.css}">
+</head>
+<body>
+<!--Header-->
+<header th:insert="~{blocks/header :: header}"></header>
+
+<div class="container mt-5">
+  <h1 style="margin-bottom: 15px">Відгуки про бібліотеку</h1>
+
+  <form style="margin-bottom: 40px" action="/addLibraryResponse">
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Розкажіть нам про ваш досвід і побажання</label>
+      <textarea class="form-control" name="responseText" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Ваша оцінка</label>
+      <input type="number" min="1" max="5" class="form-control" id="exampleFormControlInput1" placeholder="Оцініць нас від 1 до 5">
+    </div>
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+    <div th:if="${user.getEmail() == null}">
+      <p>Зайдіть у ваш акаунт або зареєструйтеся щоб залишити відгук</p>
+      <button type="submit" class="btn btn-outline-primary" disabled>Відправити</button>
+    </div>
+    <div th:unless="${user.getEmail() == null}">
+      <button type="submit" class="btn btn-outline-primary">Відправити</button>
+    </div>
+  </form>
+
+  <section class="container alert alert-info">
+    <h1>User_name</h1>
+    <p>Response Text</p>
+    <p>Rate</p>
+  </section>
+  <section class="container alert alert-info">
+    <h1>User_name</h1>
+    <p>Response Text</p>
+    <p>Rate</p>
+  </section>
+  <section class="container alert alert-info">
+    <h1>User_name</h1>
+    <p>Response Text</p>
+    <p>Rate</p>
+  </section>
+  <section class="container alert alert-info">
+    <h1>User_name</h1>
+    <p>Response Text</p>
+    <p>Rate</p>
+  </section>
+</div>
+
+
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js}" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+<script src="/static/js/validation.js" th:src="@{/static/js/validation.js}"></script>
+</body>
+</html>
