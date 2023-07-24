@@ -22,7 +22,10 @@
                 <li th:unless="${user.getEmail() == null}" class="nav-item">
                     <form th:action="@{/logout}" method="post">
                         <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+<<<<<<< HEAD
                         <input type="submit" value="Вийти" style="margin-top:5px;" class="btn btn-danger">
+=======
+>>>>>>> b061dc22030ebb4867d59e66480a7d1405564a4f
                     </form>
                 </li>
             </ul>
