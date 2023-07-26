@@ -1,4 +1,4 @@
-package com.LibraryCom.OnlineLibrary.Controllers;
+package com.LibraryCom.OnlineLibrary.Controllers.OtherControllers;
 
 import com.LibraryCom.OnlineLibrary.Models.Images;
 import com.LibraryCom.OnlineLibrary.Repositories.ImagesRepo;

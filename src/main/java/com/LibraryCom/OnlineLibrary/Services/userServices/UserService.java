@@ -18,13 +18,20 @@ public class UserService {
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
 
+
     public void createUser(User user){
         user.setActive(false);
-        user.getRoleSet().add(Role.USER_ROLE);
+        //Just to chekc if it the first user
+        if(userRepo.findAll().size() == 0){
+            //So it will be the ADMIN
+            user.getRoleSet().add(Role.ADMIN_ROLE);
+        }else{
+            user.getRoleSet().add(Role.USER_ROLE);
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
 
-        log.info("-- New user created - id:{}, name: {}, email : {}",user.getId(),user.getUsername(),user.getEmail());
+        log.info("-- New user created - id:{}, email : {}",user.getId(),user.getEmail());
     }
 
     public User findUserByPrincipal(Principal principal){

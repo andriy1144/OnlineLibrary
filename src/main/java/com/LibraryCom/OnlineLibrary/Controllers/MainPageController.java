@@ -5,6 +5,7 @@ import com.LibraryCom.OnlineLibrary.Models.Genre;
 import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Models.enums.Role;
 import com.LibraryCom.OnlineLibrary.Services.BookService;
+import com.LibraryCom.OnlineLibrary.Services.ResponseService;
 import com.LibraryCom.OnlineLibrary.Services.userServices.UserService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -25,6 +26,7 @@ public class MainPageController {
     private static final Logger logger = LoggerFactory.getLogger(MainPageController.class);
     private final BookService bookService;
     private final UserService userService;
+    private final ResponseService responseService;
 
     //Main page controller
     @GetMapping("/")
@@ -43,8 +45,10 @@ public class MainPageController {
     @GetMapping("/about")
     public String aboutPage(Model model, Principal principal) {
         User user = userService.findUserByPrincipal(principal);
-
         model.addAttribute("user",user);
+
+        model.addAttribute("generalRate",responseService.calculateGeneralRate());
+        model.addAttribute("responcesNumber",responseService.getAllResponces().size());
 
         return "aboutPage";
     }

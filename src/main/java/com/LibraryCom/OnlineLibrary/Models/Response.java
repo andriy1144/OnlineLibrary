@@ -15,8 +15,8 @@ public class Response {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "responseText")
-    private Long responseText;
+    @Column(name = "responseText",columnDefinition = "text")
+    private String responseText;
 
     @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.REFRESH})
     private User user;
