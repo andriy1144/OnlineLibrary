@@ -14,10 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.yaml.snakeyaml.util.EnumUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -95,8 +92,18 @@ public class BookService {
         }
         return result;
     }
-
-    public Set<Response> getAllBookResponces(Book book){
-        return book.getResponseSet();
+    public Set<Response> getAllBookResponces(Book book, boolean half){
+        Set<Response> bookResponces = book.getResponseSet();
+        if(half){
+            if(bookResponces.size() >= 4){
+                List<Response> responsesList = bookResponces.stream().toList();
+                bookResponces.clear();
+                for(int i = 0; i < 4;i++){
+                    bookResponces.add(responsesList.get(i));
+                }
+            }
+            return bookResponces;
+        }
+        return bookResponces;
     }
 }

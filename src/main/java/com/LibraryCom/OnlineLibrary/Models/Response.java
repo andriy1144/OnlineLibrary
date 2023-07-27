@@ -18,6 +18,9 @@ public class Response {
     @Column(name = "responseText",columnDefinition = "text")
     private String responseText;
 
+    @Column(name = "bookResponce")
+    private boolean bookResponce;
+
     @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.REFRESH})
     private User user;
 

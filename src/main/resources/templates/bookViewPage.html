@@ -27,24 +27,72 @@
         </div>
         <p style="margin-top: 40px;width: 700px;text-align: center;" th:text="${book.getDescription()}"></p>
         <h2 style="margin-top: 20px">Характеристика</h2>
-        <table class="table" style="margin-top: 30px;width: 600px">
-            <thead>
-                <tr style="font-size: 20px">
-                    <td scope="col"><strong>Характеристика</strong></td>
-                    <td scope="col" style="text-align: center"><strong>Значення</strong></td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td scope="row" >Жанри</td>
-                    <td style="text-align: center" class="table-active"> <span th:each="genre : ${book.getGenres()}" th:text="${genre.getName()} + ';'"></span></td>
-                </tr>
-                <tr th:each="feture : ${book.getFeatures()}">
-                    <td scope="row" th:text='${feture.split("=")[0]}'></td>
-                    <td style="text-align: center" class="table-active" th:text='${feture.split("=")[1]}'></td>
-                </tr>
-            </tbody>
-        </table>
+        <div style="display: flex">
+            <div>
+                <table class="table" style="margin-top: 30px;width: 600px">
+                    <thead>
+                        <tr style="font-size: 20px">
+                            <td scope="col"><strong>Характеристика</strong></td>
+                            <td scope="col" style="text-align: center"><strong>Значення</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row" >Жанри</td>
+                            <td style="text-align: center" class="table-active"> <span th:each="genre : ${book.getGenres()}" th:text="${genre.getName()} + ';'"></span></td>
+                        </tr>
+                        <tr th:each="feture : ${book.getFeatures()}">
+                            <td scope="row" th:text='${feture.split("=")[0]}'></td>
+                            <td style="text-align: center" class="table-active" th:text='${feture.split("=")[1]}'></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-left: 180px">
+
+                <section class="alert alert-primary">
+                    <h1 style="text-align: center; margin-bottom: 30px">Відгуки</h1>
+                    <form style="margin-bottom: 40px" method="post" th:action=" ${book.getId()} + '/addBookResponce/'">
+                        <div th:unless="${user.getEmail() == null}" class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Розкажіть нам про ваш досвід читання книги і побажання</label>
+                            <textarea class="form-control" name="responseText" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <div th:if="${user.getEmail() == null}" class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Розкажіть нам про ваш досвід читання книги і побажання</label>
+                            <textarea class="form-control" name="responseText" id="exampleFormControlTextarea1" rows="3" disabled></textarea>
+                        </div>
+                        <div th:if="${user.getEmail() == null}" class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Ваша оцінка</label>
+                            <input type="number" min="1" max="5" step="any" name="userRate" class="form-control" id="exampleFormControlInput1" placeholder="Оцініць нас від 1 до 5" disabled>
+                        </div>
+                        <div th:unless="${user.getEmail() == null}" class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Ваша оцінка</label>
+                            <input type="number" min="1" max="5" step="any" name="userRate" class="form-control" id="exampleFormControlInput1" placeholder="Оцініць нас від 1 до 5">
+                        </div>
+                        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                        <div th:if="${user.getEmail() == null}">
+                            <p class="alert alert-warning">Зайдіть у ваш акаунт або зареєструйтеся щоб залишити відгук</p>
+                            <button type="submit" class="btn btn-outline-primary" disabled>Відправити</button>
+                        </div>
+                        <div th:unless="${user.getEmail() == null}">
+                            <button type="submit" class="btn btn-outline-primary">Відправити</button>
+                        </div>
+
+                        <div style="margin-top: 20px" th:class="${class}" th:text="${Message}">
+
+                        </div>
+                    </form>
+                </section>
+                <section th:each="response : ${Responces}" class="container alert alert-info">
+                    <div style="display:flex">
+                        <h1 th:text="${response.getUser().getName()}"></h1>
+                        <p style="margin-left: 20px; margin-top: 16px" th:text="${#temporals.format(response.getDateOfCreating(),'dd-MM-yyyy HH:mm')}"></p>
+                    </div>
+                    <p th:text="${response.getResponseText()}"></p>
+                    <span style="font-size: 30px" th:text="${response.getUserRate()}"></span><svg style="margin-bottom: 15px; color: rgb(240, 208, 0);" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"> <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" fill="#f0d000"></path> </svg>
+                </section>
+            </div>
+        </div>
     </div>
 
 
