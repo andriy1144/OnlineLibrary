@@ -3,6 +3,7 @@ package com.LibraryCom.OnlineLibrary.Services;
 import com.LibraryCom.OnlineLibrary.Models.Book;
 import com.LibraryCom.OnlineLibrary.Models.Genre;
 import com.LibraryCom.OnlineLibrary.Models.Images;
+import com.LibraryCom.OnlineLibrary.Models.Response;
 import com.LibraryCom.OnlineLibrary.Repositories.BookRepo;
 import com.LibraryCom.OnlineLibrary.Repositories.GenreRepo;
 import jakarta.persistence.NoResultException;
@@ -93,5 +94,9 @@ public class BookService {
             result = books.stream().filter(b -> b.getName().toLowerCase().startsWith(title)).toList();
         }
         return result;
+    }
+
+    public Set<Response> getAllBookResponces(Book book){
+        return book.getResponseSet();
     }
 }

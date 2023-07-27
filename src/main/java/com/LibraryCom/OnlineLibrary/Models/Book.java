@@ -37,6 +37,10 @@ public class Book {
     @Column(name = "features")
     private List<String> features;
 
+    //Relation with Response.class
+    @OneToMany(targetEntity = Response.class, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    private Set<Response> responseSet = new HashSet<>();
+
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
