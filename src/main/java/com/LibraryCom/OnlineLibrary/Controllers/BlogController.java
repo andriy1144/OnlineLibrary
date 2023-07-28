@@ -35,8 +35,6 @@ public class BlogController {
         User user = userService.findUserByPrincipal(principal);
 
         attributes :{
-            model.addAttribute("isAdmin",user.getRoleSet().contains(Role.ADMIN_ROLE));
-            model.addAttribute("user",user);
             model.addAttribute("Posts",postService.findAllPosts());
         }
 
@@ -44,10 +42,6 @@ public class BlogController {
     }
     @GetMapping("/addBlog")
     public String addBlogPage(Principal principal,Model model){
-        User user = userService.findUserByPrincipal(principal);
-
-        model.addAttribute("user",user);
-
         return "addBlogPage";
     }
 
@@ -66,8 +60,6 @@ public class BlogController {
     @GetMapping("/blogPreview/{id}")
     public String blogPageView(@PathVariable(name = "id") Long id, Model model,
                                Principal principal){
-        User user = userService.findUserByPrincipal(principal);
-
 
         //Finding post by id
         Posts post = postService.findPostById(id);
@@ -76,8 +68,6 @@ public class BlogController {
         }else{
             ///Something...
         }
-
-        model.addAttribute("user",user);
         return "blogPageView";
     }
 

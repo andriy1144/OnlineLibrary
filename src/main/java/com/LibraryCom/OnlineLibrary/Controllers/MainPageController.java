@@ -32,10 +32,7 @@ public class MainPageController {
     @GetMapping("/")
     public String mainPage(Model model, Principal principal){
 
-        User user = userService.findUserByPrincipal(principal);
         attributes : {
-            model.addAttribute("user",user);
-            model.addAttribute("isAdmin", user.getRoleSet().contains(Role.ADMIN_ROLE));
             model.addAttribute("Genres", bookService.getAllGenres());
             model.addAttribute("Books",bookService.getAllBooks());
         }
@@ -44,9 +41,6 @@ public class MainPageController {
 
     @GetMapping("/about")
     public String aboutPage(Model model, Principal principal) {
-        User user = userService.findUserByPrincipal(principal);
-        model.addAttribute("user",user);
-
         model.addAttribute("generalRate",responseService.calculateGeneralRate());
         model.addAttribute("responcesNumber",responseService.getAllResponces().size());
 

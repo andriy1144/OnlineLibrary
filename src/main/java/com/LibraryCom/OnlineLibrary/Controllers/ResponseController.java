@@ -25,9 +25,6 @@ public class ResponseController {
     //Library responses
     @GetMapping("/libraryRespones")
     public String libraryResponse(Model model, Principal principal){
-        User user = userService.findUserByPrincipal(principal);
-
-        model.addAttribute("user",user);
         model.addAttribute("Responces", responseService.getAllResponces());
         return "libraryResponsesPage";
     }

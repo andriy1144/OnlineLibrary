@@ -16,7 +16,6 @@ import java.security.Principal;
 public class UserController {
     //Required variables
     private final UserService userService;
-    private final UserRepo userRepo;
 
     @GetMapping("/registration")
     public String registrationPage(Principal principal, Model model){
@@ -36,10 +35,6 @@ public class UserController {
 
     @GetMapping("/login")
     public String loginPage(Model model,Principal principal){
-        User user = userService.findUserByPrincipal(principal);
-
-        model.addAttribute("user",user);
-
         return "login";
     }
 }

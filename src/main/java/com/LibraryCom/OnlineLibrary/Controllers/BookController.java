@@ -30,9 +30,9 @@ public class BookController {
     //Showing the addBookPage.html
     @GetMapping("/addNewBook")
     public String addBookPage(Model model, Principal principal){
-        User user = userService.findUserByPrincipal(principal);
+//        User user = userService.findUserByPrincipal(principal);
 
-        model.addAttribute("user",user);
+//        model.addAttribute("user",user);
 
         model.addAttribute("Genres", bookService.getAllGenres());
         return "addBookPage";
@@ -51,9 +51,6 @@ public class BookController {
 
     @GetMapping("/{id}")
     public String viewBook(@PathVariable(name = "id") Long id,Model model,Principal principal){
-        User user = userService.findUserByPrincipal(principal);
-
-        model.addAttribute("user",user);
 
         Book book = bookService.getBookById(id);
 
@@ -70,7 +67,6 @@ public class BookController {
                                    Principal principal, Model model){
         User user = userService.findUserByPrincipal(principal);
 
-        model.addAttribute("user",user);
 
         Book book = bookService.getBookById(id);
 
@@ -85,6 +81,7 @@ public class BookController {
             model.addAttribute("Message", "Ви вже залишали ваш відгук на цю книгу!");
         }
 
+        model.addAttribute("user",user);
         return "bookViewPage";
     }
 }
