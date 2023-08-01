@@ -1,5 +1,7 @@
 package com.LibraryCom.OnlineLibrary.Models;
 
+import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.BookResponce;
+import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.LibraryResponse;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,10 +39,9 @@ public class Book {
     @Column(name = "features")
     private List<String> features;
 
-    //Relation with Response.class
-    @OneToMany(targetEntity = Response.class, cascade = {CascadeType.REMOVE}, fetch = FetchType.EAGER)
-    private Set<Response> responseSet = new HashSet<>();
-
+    //BookResponce Relation
+    @OneToMany(mappedBy = "book",cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
+    private List<BookResponce> bookResponces = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {

@@ -1,5 +1,7 @@
 package com.LibraryCom.OnlineLibrary.Models;
 
+import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.BookResponce;
+import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.LibraryResponse;
 import com.LibraryCom.OnlineLibrary.Models.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -43,10 +45,12 @@ public class User implements UserDetails {
     private Set<Role> roleSet = new HashSet<>();
 
 
-    //Responses relation
-    @OneToMany(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.ALL},fetch = FetchType.LAZY)
-    private Set<Response> responseSet = new HashSet<>();
+    //Library Responses relation
+    @OneToOne(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.ALL})
+    private LibraryResponse libraryResponse;
 
+    @OneToMany(cascade = CascadeType.REMOVE,fetch = FetchType.EAGER,mappedBy = "user")
+    private Set<BookResponce> bookResponces = new HashSet<>();
 
     //User Details implementation
     @Override

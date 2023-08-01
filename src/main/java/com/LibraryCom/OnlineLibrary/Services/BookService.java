@@ -3,15 +3,13 @@ package com.LibraryCom.OnlineLibrary.Services;
 import com.LibraryCom.OnlineLibrary.Models.Book;
 import com.LibraryCom.OnlineLibrary.Models.Genre;
 import com.LibraryCom.OnlineLibrary.Models.Images;
-import com.LibraryCom.OnlineLibrary.Models.Response;
+import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.LibraryResponse;
 import com.LibraryCom.OnlineLibrary.Repositories.BookRepo;
 import com.LibraryCom.OnlineLibrary.Repositories.GenreRepo;
-import jakarta.persistence.NoResultException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.yaml.snakeyaml.util.EnumUtils;
 
 import java.io.IOException;
 import java.util.*;
@@ -92,18 +90,18 @@ public class BookService {
         }
         return result;
     }
-    public Set<Response> getAllBookResponces(Book book, boolean half){
-        Set<Response> bookResponces = book.getResponseSet();
-        if(half){
-            if(bookResponces.size() >= 4){
-                List<Response> responsesList = bookResponces.stream().toList();
-                bookResponces.clear();
-                for(int i = 0; i < 4;i++){
-                    bookResponces.add(responsesList.get(i));
-                }
-            }
-            return bookResponces;
-        }
-        return bookResponces;
-    }
+//    public Set<LibraryResponse> getAllBookResponces(Book book, boolean half){
+//        Set<LibraryResponse> bookResponces = book.getLibraryResponseSet();
+//        if(half){
+//            if(bookResponces.size() >= 4){
+//                List<LibraryResponse> responsesList = bookResponces.stream().toList();
+//                bookResponces.clear();
+//                for(int i = 0; i < 4;i++){
+//                    bookResponces.add(responsesList.get(i));
+//                }
+//            }
+//            return bookResponces;
+//        }
+//        return bookResponces;
+//    }
 }

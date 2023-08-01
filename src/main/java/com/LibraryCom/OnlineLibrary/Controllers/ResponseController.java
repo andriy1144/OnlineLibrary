@@ -1,6 +1,6 @@
 package com.LibraryCom.OnlineLibrary.Controllers;
 
-import com.LibraryCom.OnlineLibrary.Models.Response;
+import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.LibraryResponse;
 import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Services.ResponseService;
 import com.LibraryCom.OnlineLibrary.Services.userServices.UserService;
@@ -30,10 +30,10 @@ public class ResponseController {
     }
 
     @PostMapping("/addLibraryResponse")
-    public String saveResponce(Response response, Model model, Principal principal){
+    public String saveResponce(LibraryResponse libraryResponse, Model model, Principal principal){
         User user = userService.findUserByPrincipal(principal);
 
-        if(responseService.saveResponse(response,user)){
+        if(responseService.saveResponse(libraryResponse,user)){
             model.addAttribute("Message","Ваш відгку був успішно надісланий!");
             model.addAttribute("class","alert alert-success");
         }else{
