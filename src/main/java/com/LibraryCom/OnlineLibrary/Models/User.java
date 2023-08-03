@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -52,6 +53,13 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.REMOVE,fetch = FetchType.EAGER,mappedBy = "user")
     private Set<BookResponce> bookResponces = new HashSet<>();
 
+    @Column(name = "dateOfCreating")
+    private LocalDateTime dateOfCreating;
+
+    @PrePersist
+    private void init(){
+        dateOfCreating = LocalDateTime.now();
+    }
     //User Details implementation
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

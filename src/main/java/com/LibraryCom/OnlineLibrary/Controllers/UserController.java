@@ -4,6 +4,7 @@ import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Repositories.UserRepo;
 import com.LibraryCom.OnlineLibrary.Services.userServices.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,5 +37,11 @@ public class UserController {
     @GetMapping("/login")
     public String loginPage(Model model,Principal principal){
         return "login";
+    }
+
+    //User homePage
+    @GetMapping("/homepage")
+    public String UserHomePage(Model model,Principal principal){
+        return "homePage";
     }
 }
