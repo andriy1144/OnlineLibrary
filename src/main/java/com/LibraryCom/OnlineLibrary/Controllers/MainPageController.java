@@ -42,7 +42,8 @@ public class MainPageController {
     @GetMapping("/about")
     public String aboutPage(Model model, Principal principal) {
         model.addAttribute("generalRate",responseService.calculateGeneralRate());
-        model.addAttribute("responcesNumber",responseService.getAllResponces().size());
+        if(responseService.getAllResponces().size() == 0) model.addAttribute("responcesNumber","Відгуків немає");
+        else model.addAttribute(responseService.getAllResponces().size());
 
         return "aboutPage";
     }
