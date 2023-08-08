@@ -39,3 +39,25 @@ function validateInput(el){
         return true;
     }
 }
+
+function validateAddBookForm(el){
+    const name = el.name.value;
+    const author = el.author.value;
+    const descr = el.description.value;
+    const feature = el.features.value;
+
+    const genreChekbox = el.genresList;
+
+    let isCheckedSomething = false;
+    for(let i = 0; i < genreChekbox.length; i++){
+        if(genreChekbox[i].checked === true){
+            isCheckedSomething = true
+        }
+    }
+
+    if(name === "" || author === "" || descr === "" || feature === "" || !isCheckedSomething){
+        alert("--Усі поля крім Картинок повині бути заповнені--")
+        return false;
+    }
+    return true;
+}
