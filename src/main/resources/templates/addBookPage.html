@@ -12,7 +12,7 @@
   <!--Send form-->
   <div class="container mt-5">
     <h1>Додавання нової книги</h1>
-    <form method="post" action="/book/addBook" enctype="multipart/form-data">
+    <form onsubmit="return validateAddBookForm(this)" method="post" action="/book/addBook" enctype="multipart/form-data">
       <div class="form-floating mb-3">
         <input type="text" name="name" class="form-control" id="floatingInput" placeholder="Назва книги">
         <label for="floatingInput">Назва книги</label>
@@ -43,8 +43,8 @@
       <button id="buttonInputer" onclick="addMoreInputer()" type="button" class="btn btn-primary mb-3">Add More Inputer</button>
       <div id="fileInputer">
         <div class="mb-3">
-          <label for="formFileMultiple" class="form-label">File 1</label>
-          <p> The first one image will be <strong>preview</strong></p>
+          <label for="formFileMultiple" class="form-label">Зображення 1</label>
+          <p> Перша картинка буде <strong>оглядовою</strong></p>
           <input class="form-control" name="files" type="file" id="formFileMultiple" multiple>
         </div>
       </div>
@@ -55,6 +55,7 @@
 
 
   <script src="/static/js/script.js" th:src="@{/static/js/script.js}"></script>
+  <script src="/static/js/validation.js" th:src="@{/static/js/validation.js}"></script>
   <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js}" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
 </html>

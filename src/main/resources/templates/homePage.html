@@ -16,7 +16,7 @@
     <h1> Персональні дані </h1>
     <div>
       Ім'я: <p th:text="${user.getName()}"> </p>
-      Учасник бібліотеки із: <p th:text="${#temporals.format(user.getDateOfCreating(),'dd-MM-yyyy')}"></p>
+      Є учасником бібліотеки із: <p th:text="${#temporals.format(user.getDateOfCreating(),'dd-MM-yyyy')}"></p>
     </div>
   </div>
 
@@ -28,7 +28,7 @@
         <img class="card-img-top" width="250px" height="205"  alt="...">
         <div class="card-body">
           <h5  class="card-title"> Книга 1 </h5>
-          <p class="card-text" > КНИГА ТЕКСТ</p>
+          <p class="card-text" > КНИГА ОПИС </p>
 <!--          <p class="card-text" th:text="${Book.getDescription()}" th:unless="${Book.getDescription().length() >= 155}"></p>-->
           <a href="#" class="btn btn-primary">Більше...</a>
         </div>

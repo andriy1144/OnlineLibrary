@@ -27,9 +27,14 @@ public class UserController {
     }
     //Post registration
     @PostMapping("/registration")
-    public String registrationPost(User user){
+    public String registrationPost(User user,Model model){
 
-        userService.createUser(user);
+        if(!userService.createUser(user)){
+            model.addAttribute("errorMessage","Користувач із такою " +
+                    "електроною скринькою вже існує");
+            model.addAttribute("classError","alert alert-danger");
+            return "registration";
+        }
 
         return "redirect:/login";
     }

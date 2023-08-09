@@ -2,21 +2,16 @@ package com.LibraryCom.OnlineLibrary.Controllers;
 
 import com.LibraryCom.OnlineLibrary.Models.Posts;
 import com.LibraryCom.OnlineLibrary.Models.User;
-import com.LibraryCom.OnlineLibrary.Models.enums.Role;
-import com.LibraryCom.OnlineLibrary.Repositories.PostsRepo;
 import com.LibraryCom.OnlineLibrary.Services.PostService;
 import com.LibraryCom.OnlineLibrary.Services.userServices.UserService;
 import lombok.AllArgsConstructor;
-import org.hibernate.mapping.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.channels.Pipe;
 import java.security.Principal;
 
 @Controller
@@ -32,8 +27,6 @@ public class BlogController {
     //Controllers
     @GetMapping("/")
     public String blogPage(Model model, Principal principal){
-        User user = userService.findUserByPrincipal(principal);
-
         attributes :{
             model.addAttribute("Posts",postService.findAllPosts());
         }
@@ -41,7 +34,8 @@ public class BlogController {
         return "blogPage";
     }
     @GetMapping("/addBlog")
-    public String addBlogPage(Principal principal,Model model){
+    public String addBlogPage(Principal principal,
+                              Model model){
         return "addBlogPage";
     }
 

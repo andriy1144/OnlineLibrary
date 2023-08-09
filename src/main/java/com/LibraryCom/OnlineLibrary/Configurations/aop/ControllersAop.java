@@ -28,7 +28,7 @@ public class ControllersAop {
     public void beforeGetMappingAdvice(JoinPoint joinPoint, Model model, Principal principal) {
         User user = userService.findUserByPrincipal(principal);
         if (user != null) {
-//            System.out.println(user.getEmail());
+            System.out.println(user.getEmail());
             model.addAttribute("user", user);
             model.addAttribute("isAdmin", user.getRoleSet().contains(Role.ADMIN_ROLE));
         }
