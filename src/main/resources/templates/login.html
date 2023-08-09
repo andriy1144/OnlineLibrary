@@ -10,7 +10,7 @@
 <!--Header-->
 <header th:insert="~{blocks/header :: header}"></header>
 
-<form th:action="@{/login}" method="post" style="width: 400px" class="container mt-5">
+<form th:action="@{/login}" onsubmit="return validateLoginForm(this)" method="post" style="width: 400px" class="container mt-5">
   <div class="mb-3">
     <label class="form-label">Електрона пошта</label>
     <input type="email" name="username" class="form-control">

@@ -19,7 +19,14 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public void createUser(User user){
+    public boolean createUser(User user){
+        //Check if Such user already exists
+        User checkUser = userRepo.findUserByEmail(user.getEmail());
+        if(checkUser != null){
+            log.warn("--Error creating user: Already exists --");
+            return false;
+        }
+
         user.setActive(false);
         //Just to chekc if it the first user
         if(userRepo.findAll().size() == 0){
@@ -32,6 +39,7 @@ public class UserService {
         userRepo.save(user);
 
         log.info("-- New user created - id:{}, email : {}",user.getId(),user.getEmail());
+        return true;
     }
 
     public User findUserByPrincipal(Principal principal){

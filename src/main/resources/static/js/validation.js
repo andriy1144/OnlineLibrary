@@ -61,3 +61,52 @@ function validateAddBookForm(el){
     }
     return true;
 }
+
+// Validation of Authentication section
+function validateLoginForm(el){
+    const email = el.email.value;
+    const pass = el.password.value;
+
+    if(email === "" || pass === ""){
+        alert("--Не всі поля вводу заповнені--")
+        return false;
+    }
+    return true;
+}
+
+function validateRegistrationForm(el){
+    const userName = el.name.value;
+    const email = el.email.value;
+    const phoneNumber = el.phoneNumber.value;
+
+    const password = el.password.value;
+    const passwordReapeat = el.passwordReapeat.value;
+
+    if(userName === ""
+        || email === ""
+        || phoneNumber === ""
+        || password === ""
+        || passwordReapeat === ""){
+        alert("-- Будь-ласка заповніть УСІ поля-- ")
+        return false;
+    }
+    const checkOnSpaces = password.split(" ");
+
+    const checlOnSymbols = password.split("!");
+
+    const checlOnSymbols2 = password.split("^");
+
+    if(password.trim().length < 8 || checlOnSymbols.length > 1 || checlOnSymbols2.length > 1){
+        alert("-- Пароль повинен містити 8 і більше символів \n" +
+            "А також не повинен містити таких знаків: !,^ \n" +
+            "Та пробілів");
+        return false;
+    }
+
+    if(password !== passwordReapeat){
+        alert("-- Паролі не співпадають --");
+        return false;
+    }
+
+    return true;
+}

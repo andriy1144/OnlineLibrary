@@ -15,16 +15,20 @@
 
   <form style="margin-bottom: 40px" method="post" action="/addLibraryResponse">
     <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">Розкажіть нам про ваш досвід і побажання</label>
-      <textarea class="form-control" name="responseText" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <label for="exampleFormControlTextarea1" class="form-label">Розкажіть нам про ваш досвід і побажання...</label>
+
+      <textarea th:if="${user.getEmail() == null}" class="form-control" name="responseText" id="exampleFormControlTextarea1" rows="3" disabled></textarea>
+      <textarea th:unless="${user.getEmail() == null}" class="form-control" name="responseText" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Ваша оцінка</label>
-      <input type="number" min="1" max="5" step="any" name="userRate" class="form-control" id="exampleFormControlInput1" placeholder="Оцініць нас від 1 до 5">
+
+      <input th:if="${user.getEmail() == null}" type="number" min="1" max="5" step="any" name="userRate" class="form-control" id="exampleFormControlInput1" placeholder="Оцініць нас від 1 до 5" disabled>
+      <input th:unless="${user.getEmail() == null}" type="number" min="1" max="5" step="any" name="userRate" class="form-control" id="exampleFormControlInput1" placeholder="Оцініць нас від 1 до 5">
     </div>
     <input type="hidden" name="_csrf" th:value="${_csrf.token}">
     <div th:if="${user.getEmail() == null}">
-      <p class="alert alert-warning">Зайдіть у ваш акаунт або зареєструйтеся щоб залишити відгук</p>
+      <p class="alert alert-warning">Зайдіть у ваш акаунт або зареєструйтеся , щоб залишити відгук</p>
       <button type="submit" class="btn btn-outline-primary" disabled>Відправити</button>
     </div>
     <div th:unless="${user.getEmail() == null}">

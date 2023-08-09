@@ -10,7 +10,7 @@
 <!--Header-->
 <header th:insert="~{blocks/header :: header}"></header>
 
-<form th:action="@{/registration}" class="container mt-5" style="width: 400px" method="post">
+<form th:action="@{/registration}" onsubmit="return validateRegistrationForm(this)" class="container mt-5" style="width: 400px" method="post">
   <div class="mb-3">
     <label class="form-label">Нікнейм користувача</label>
     <input type="text" name="name" class="form-control">
@@ -29,6 +29,13 @@
     <div id="passwordHelpBlock" class="form-text">
       Ваш пароль має містити 8-20 символів, містити літери та цифри та не містити пробілів, спеціальних символів чи смайлів.
     </div>
+  </div>
+  <div class="mb-3">
+    <label for="inputPassword5" class="form-label">Повторіть ваш пароль</label>
+    <input type="password" id="inputPassword5" name="passwordReapeat" class="form-control" aria-labelledby="passwordHelpBlock">
+  </div>
+  <div th:text="${errorMessage}" th:class="${classError}">
+
   </div>
   <input type="hidden" name="_csrf" th:value="${_csrf.token}">
   <button type="submit" class="btn btn-success">Зареєструватися</button>

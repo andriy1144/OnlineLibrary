@@ -43,7 +43,7 @@ public class MainPageController {
     public String aboutPage(Model model, Principal principal) {
         model.addAttribute("generalRate",responseService.calculateGeneralRate());
         if(responseService.getAllResponces().size() == 0) model.addAttribute("responcesNumber","Відгуків немає");
-        else model.addAttribute(responseService.getAllResponces().size());
+        else model.addAttribute("responcesNumber",responseService.getAllResponces().size());
 
         return "aboutPage";
     }

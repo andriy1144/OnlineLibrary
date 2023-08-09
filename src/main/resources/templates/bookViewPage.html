@@ -71,7 +71,7 @@
                         </div>
                         <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                         <div th:if="${user.getEmail() == null}">
-                            <p class="alert alert-warning">Зайдіть у ваш акаунт або зареєструйтеся щоб залишити відгук</p>
+                            <p class="alert alert-warning">Зайдіть у ваш акаунт або зареєструйтеся, щоб залишити відгук</p>
                             <button type="submit" class="btn btn-outline-primary" disabled>Відправити</button>
                         </div>
                         <div th:unless="${user.getEmail() == null}">
