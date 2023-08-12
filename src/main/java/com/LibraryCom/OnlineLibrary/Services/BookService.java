@@ -90,6 +90,23 @@ public class BookService {
         }
         return result;
     }
+
+    public boolean deleteBook(Long id){
+        //Deleting book
+        try{
+            //if Something goes wrong it will catch and return false
+            bookRepo.deleteById(id);
+
+            log.info("--Book with id: {} deleted successful",id);
+
+            return true;
+        }catch (Exception e){
+            log.error("-- Book deleting went wrong --");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 //    public Set<LibraryResponse> getAllBookResponces(Book book, boolean half){
 //        Set<LibraryResponse> bookResponces = book.getLibraryResponseSet();
 //        if(half){

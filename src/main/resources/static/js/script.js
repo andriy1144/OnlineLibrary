@@ -8,3 +8,13 @@ function addMoreInputer() {
         "                       </div>"
     counter++;
 }
+
+
+function deleteConfirm(){
+    let choice = confirm("-- Ви точно хочете видалити цю книгу --");
+
+    if (!choice) {
+        return false;
+    }
+    return true;
+}

@@ -58,6 +58,9 @@
                         <p class="card-text" th:text="${Book.getDescription().substring(0,155)} + '...' " th:if="${Book.getDescription().length() >= 155}"></p>
                         <p class="card-text" th:text="${Book.getDescription()}" th:unless="${Book.getDescription().length() >= 155}"></p>
                         <a th:href=" '/book/' + ${Book.getId()}" class="btn btn-primary">Більше...</a>
+                        <form th:if="${isAdmin}" th:action="'/book/delete/' + ${Book.getId()}" onsubmit="return deleteConfirm()" style="margin-top: 15px">
+                            <input type="submit" value="Видалити" class="btn btn-danger">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -67,5 +70,6 @@
 
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js}" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <script src="/static/js/validation.js" th:src="@{/static/js/validation.js}"></script>
+    <script src="/static/js/script.js" th:src="@{/static/js/script.js}"></script>
 </body>
 </html>

@@ -60,6 +60,14 @@ public class BookController {
         return "bookViewPage";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable(name = "id") Long id){
+
+        //Execute deleteBook method
+        bookService.deleteBook(id);
+
+        return "redirect:/";
+    }
     //!!!Fix in the future!!!
 //    @PostMapping("{id}/addBookResponce/")
 //    public String saveBookResponce(@ModelAttribute BookResponce bookResponce,
