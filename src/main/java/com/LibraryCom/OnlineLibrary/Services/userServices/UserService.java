@@ -1,5 +1,6 @@
 package com.LibraryCom.OnlineLibrary.Services.userServices;
 
+import com.LibraryCom.OnlineLibrary.Models.Book;
 import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Models.enums.Role;
 import com.LibraryCom.OnlineLibrary.Repositories.UserRepo;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -47,4 +49,8 @@ public class UserService {
         return new User();
     }
 
+    public Set<Book> getTakenBooks(Principal principal){
+        User user = findUserByPrincipal(principal);
+        return user.getTakenBooks();
+    }
 }
