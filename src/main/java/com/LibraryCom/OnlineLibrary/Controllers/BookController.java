@@ -68,6 +68,27 @@ public class BookController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/takeBook/{id}")
+    public String takeBook(@PathVariable(name = "id") Long id,
+                           Model model,
+                           Principal principal){
+
+        Book book = bookService.getBookById(id);
+        User user = userService.findUserByPrincipal(principal);
+
+        if(bookService.addBookToInventory(book,user)){
+            model.addAttribute("className","alert alert-success");
+            model.addAttribute("text","Ви успішно орендували книгу!\n" +
+                    "Не забудьте її вчасно вернути");
+        }else{
+            model.addAttribute("className", "alert alert-danger");
+            model.addAttribute("text", "Книга не була орендована");
+        }
+
+        model.addAttribute("book", book);
+        return "bookViewPage";
+    }
     //!!!Fix in the future!!!
 //    @PostMapping("{id}/addBookResponce/")
 //    public String saveBookResponce(@ModelAttribute BookResponce bookResponce,

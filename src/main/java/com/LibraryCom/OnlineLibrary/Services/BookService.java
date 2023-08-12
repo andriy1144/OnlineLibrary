@@ -4,8 +4,10 @@ import com.LibraryCom.OnlineLibrary.Models.Book;
 import com.LibraryCom.OnlineLibrary.Models.Genre;
 import com.LibraryCom.OnlineLibrary.Models.Images;
 import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.LibraryResponse;
+import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Repositories.BookRepo;
 import com.LibraryCom.OnlineLibrary.Repositories.GenreRepo;
+import com.LibraryCom.OnlineLibrary.Repositories.UserRepo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Slf4j
 public class BookService {
+    private final UserRepo userRepo;
 
     private final GenreRepo genreRepo;
     private final BookRepo bookRepo;
@@ -107,6 +110,22 @@ public class BookService {
         }
     }
 
+    public boolean addBookToInventory(Book book, User user){
+        if(book != null){
+            user.addBookToInventory(book);
+
+            book.setTaken(true);
+
+            bookRepo.save(book);
+
+            userRepo.save(user);
+            log.info("-- Book with id {} , added to the user's inventory with id {}",book.getId(),user.getId());
+
+            return true;
+        }
+
+        return false;
+    }
 //    public Set<LibraryResponse> getAllBookResponces(Book book, boolean half){
 //        Set<LibraryResponse> bookResponces = book.getLibraryResponseSet();
 //        if(half){
