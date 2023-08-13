@@ -69,6 +69,8 @@ public class BookService {
             book.addGenre(gnr);
         }
 
+        book.setUserTaker(null);
+
         bookRepo.save(book);
         log.info("-- Saved new book with id : {}, name: {}, genreListSize : {} , imagesListSize : {}",book.getId(),book.getName(),book.getGenres().size(),book.getImagesList().size());
     }
@@ -112,13 +114,11 @@ public class BookService {
 
     public boolean addBookToInventory(Book book, User user){
         if(book != null){
-            user.addBookToInventory(book);
 
-            book.setTaken(true);
+            book.setUserTaker(user);
 
             bookRepo.save(book);
 
-            userRepo.save(user);
             log.info("-- Book with id {} , added to the user's inventory with id {}",book.getId(),user.getId());
 
             return true;
@@ -126,18 +126,4 @@ public class BookService {
 
         return false;
     }
-//    public Set<LibraryResponse> getAllBookResponces(Book book, boolean half){
-//        Set<LibraryResponse> bookResponces = book.getLibraryResponseSet();
-//        if(half){
-//            if(bookResponces.size() >= 4){
-//                List<LibraryResponse> responsesList = bookResponces.stream().toList();
-//                bookResponces.clear();
-//                for(int i = 0; i < 4;i++){
-//                    bookResponces.add(responsesList.get(i));
-//                }
-//            }
-//            return bookResponces;
-//        }
-//        return bookResponces;
-//    }
 }

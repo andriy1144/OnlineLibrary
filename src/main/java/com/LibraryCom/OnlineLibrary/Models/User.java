@@ -48,6 +48,7 @@ public class User implements UserDetails {
     //Taken List
     @Column(name = "takenBooks")
     @OneToMany(targetEntity = Book.class,
+            mappedBy = "userTaker",
             cascade = {
             CascadeType.REFRESH
             },
@@ -56,6 +57,10 @@ public class User implements UserDetails {
 
     public void addBookToInventory(Book book){
         takenBooks.add(book);
+    }
+
+    public void removeBook(Book book){
+        this.takenBooks.remove(book);
     }
     //Library Responses relation
     @OneToOne(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.ALL})

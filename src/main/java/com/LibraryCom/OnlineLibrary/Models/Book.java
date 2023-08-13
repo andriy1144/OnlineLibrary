@@ -33,8 +33,9 @@ public class Book {
     @Column(name = "author")
     private String author;
 
-    @Column(name = "isTaken")
-    private boolean isTaken;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.REFRESH})
+    private User userTaker;
 
     @Column(name = "features")
     private List<String> features;
