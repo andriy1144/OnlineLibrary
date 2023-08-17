@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -69,6 +70,7 @@ public class BookService {
             book.addGenre(gnr);
         }
 
+        book.setDaysLeft(null);
         book.setUserTaker(null);
 
         bookRepo.save(book);
@@ -116,6 +118,7 @@ public class BookService {
         if(book != null){
 
             book.setUserTaker(user);
+            book.setDaysLeft(30L);
 
             bookRepo.save(book);
 

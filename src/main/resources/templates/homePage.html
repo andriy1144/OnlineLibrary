@@ -34,7 +34,12 @@
           <p class="card-text" th:text="${Book.getDescription()}" th:unless="${Book.getDescription().length() >= 155}"></p>
           <a th:href="'/book/' + ${Book.getId()}" class="btn btn-primary">Більше...</a>
         </div>
+        <div class="alert alert-danger" th:if="${Book.getDaysLeft() == -1}">
+            <strong>Ваш термін оренди книги вичерпаний будь-ласка поверніть її у бібліотеку</strong>
+        </div>
+        <div class="alert alert-warning" th:unless="${Book.getDaysLeft() == -1}" th:text="'Лишилося днів до повернення ' + ${Book.getDaysLeft()}">
 
+        </div>
       </div>
 
     </div>

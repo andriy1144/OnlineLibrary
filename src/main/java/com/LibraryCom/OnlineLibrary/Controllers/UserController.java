@@ -48,7 +48,6 @@ public class UserController {
     @GetMapping("/homepage")
     public String UserHomePage(Model model,Principal principal){
         model.addAttribute("books", userService.getTakenBooks(principal));
-
         return "homePage";
     }
 }
