@@ -4,14 +4,17 @@ import com.LibraryCom.OnlineLibrary.Models.Book;
 import com.LibraryCom.OnlineLibrary.Models.Genre;
 import com.LibraryCom.OnlineLibrary.Models.Images;
 import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.LibraryResponse;
+import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Repositories.BookRepo;
 import com.LibraryCom.OnlineLibrary.Repositories.GenreRepo;
+import com.LibraryCom.OnlineLibrary.Repositories.UserRepo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Slf4j
 public class BookService {
+    private final UserRepo userRepo;
 
     private final GenreRepo genreRepo;
     private final BookRepo bookRepo;
@@ -66,6 +70,9 @@ public class BookService {
             book.addGenre(gnr);
         }
 
+        book.setDaysLeft(null);
+        book.setUserTaker(null);
+
         bookRepo.save(book);
         log.info("-- Saved new book with id : {}, name: {}, genreListSize : {} , imagesListSize : {}",book.getId(),book.getName(),book.getGenres().size(),book.getImagesList().size());
     }
@@ -107,18 +114,19 @@ public class BookService {
         }
     }
 
-//    public Set<LibraryResponse> getAllBookResponces(Book book, boolean half){
-//        Set<LibraryResponse> bookResponces = book.getLibraryResponseSet();
-//        if(half){
-//            if(bookResponces.size() >= 4){
-//                List<LibraryResponse> responsesList = bookResponces.stream().toList();
-//                bookResponces.clear();
-//                for(int i = 0; i < 4;i++){
-//                    bookResponces.add(responsesList.get(i));
-//                }
-//            }
-//            return bookResponces;
-//        }
-//        return bookResponces;
-//    }
+    public boolean addBookToInventory(Book book, User user){
+        if(book != null){
+
+            book.setUserTaker(user);
+            book.setDaysLeft(30L);
+
+            bookRepo.save(book);
+
+            log.info("-- Book with id {} , added to the user's inventory with id {}",book.getId(),user.getId());
+
+            return true;
+        }
+
+        return false;
+    }
 }

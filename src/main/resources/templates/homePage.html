@@ -23,16 +23,25 @@
   <!-- Book Info -->
   <div style="width: 1003px; text-align: center">
     <h1>Книги взяті у оренду</h1>
+
     <div style="margin-top: 20px" class="book-zone row col-md-40">
-      <div  class="card" style="width: 18rem;  height: 500px">
-        <img class="card-img-top" width="250px" height="205"  alt="...">
+
+      <div th:each="Book : ${books}"  class="card" style="width: 18rem;  height: 500px">
+        <img th:src=" '/images/' + ${Book.getImagesList().get(0).getId()}" class="card-img-top" width="250px" height="205"  alt="...">
         <div class="card-body">
-          <h5  class="card-title"> Книга 1 </h5>
-          <p class="card-text" > КНИГА ОПИС </p>
-<!--          <p class="card-text" th:text="${Book.getDescription()}" th:unless="${Book.getDescription().length() >= 155}"></p>-->
-          <a href="#" class="btn btn-primary">Більше...</a>
+          <h5  class="card-title"  th:text="${Book.getName()}"></h5>
+          <p class="card-text" th:text="${Book.getDescription().substring(0,155)} + '...' " th:if="${Book.getDescription().length() >= 155}"></p>
+          <p class="card-text" th:text="${Book.getDescription()}" th:unless="${Book.getDescription().length() >= 155}"></p>
+          <a th:href="'/book/' + ${Book.getId()}" class="btn btn-primary">Більше...</a>
+        </div>
+        <div class="alert alert-danger" th:if="${Book.getDaysLeft() == -1}">
+            <strong>Ваш термін оренди книги вичерпаний будь-ласка поверніть її у бібліотеку</strong>
+        </div>
+        <div class="alert alert-warning" th:unless="${Book.getDaysLeft() == -1}" th:text="'Лишилося днів до повернення ' + ${Book.getDaysLeft()}">
+
         </div>
       </div>
+
     </div>
   </div>
 </section>

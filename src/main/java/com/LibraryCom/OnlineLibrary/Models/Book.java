@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
@@ -33,8 +34,11 @@ public class Book {
     @Column(name = "author")
     private String author;
 
-    @Column(name = "isTaken")
-    private boolean isTaken;
+    @Column(name = "daysLeft")
+    private Long daysLeft;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = {CascadeType.REFRESH})
+    private User userTaker;
 
     @Column(name = "features")
     private List<String> features;

@@ -18,11 +18,20 @@
             </div>
             <div class="name" style="margin-left: 125px; margin-top: 100px;height: 200px">
                     <div style="display: flex">
-                        <h1 th:if="${book.isTaken()}">Наданий момент орендована</h1>
-                        <h1 style="margin-top: 10px" th:unless="${book.isTaken()}">Орендувати:</h1>
-                        <a style="height: 80px;font-size: 40px;margin-left: 55px;width: 200px" href="#" th:unless="${book.isTaken()}" class="btn btn-success">Так</a>
+                        <h1 th:if="${book.getUserTaker() != null}">Наданий момент орендована</h1>
+                        <h1 style="margin-top: 10px" th:unless="${book.getUserTaker() != null}">Орендувати:</h1>
+
+                        <a style="height: 80px;font-size: 40px;margin-left: 55px;width: 200px" th:href=" '/book/takeBook/' + ${book.getId()}" th:unless="${book.getUserTaker() != null || user.getEmail() == null}" class="btn btn-success" aria-disabled="true">Так</a>
+
+                        <div th:if="${user.getEmail() == null}">
+                            <a style="height: 80px;font-size: 40px;margin-left: 55px;width: 200px" th:href=" '/book/takeBook/' + ${book.getId()}" th:unless="${book.getUserTaker() != null}" class="btn btn-success" aria-disabled="true">Так</a>
+                            <p>Зайдіть в акаунт спершу ніж брати книгу</p>
+                        </div>
                     </div>
                     <p style="margin-top: 20px" th:text=" 'Автор(и):' +  ${book.getAuthor()}"></p>
+                    <div th:class="${className}" th:text="${text}">
+
+                    </div>
             </div>
         </div>
         <p style="margin-top: 40px;width: 700px;text-align: center;" th:text="${book.getDescription()}"></p>

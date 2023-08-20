@@ -45,7 +45,23 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roleSet = new HashSet<>();
 
+    //Taken List
+    @Column(name = "takenBooks")
+    @OneToMany(targetEntity = Book.class,
+            mappedBy = "userTaker",
+            cascade = {
+            CascadeType.REFRESH
+            },
+    fetch = FetchType.EAGER)
+    private Set<Book> takenBooks = new HashSet<>();
 
+    public void addBookToInventory(Book book){
+        takenBooks.add(book);
+    }
+
+    public void removeBook(Book book){
+        this.takenBooks.remove(book);
+    }
     //Library Responses relation
     @OneToOne(mappedBy = "user",cascade = {CascadeType.REMOVE,CascadeType.ALL})
     private LibraryResponse libraryResponse;
