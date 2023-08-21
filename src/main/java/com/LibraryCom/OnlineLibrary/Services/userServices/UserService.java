@@ -1,8 +1,10 @@
 package com.LibraryCom.OnlineLibrary.Services.userServices;
 
 import com.LibraryCom.OnlineLibrary.Models.Book;
+import com.LibraryCom.OnlineLibrary.Models.Token;
 import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Models.enums.Role;
+import com.LibraryCom.OnlineLibrary.Repositories.TokenRepo;
 import com.LibraryCom.OnlineLibrary.Repositories.UserRepo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +18,11 @@ import java.util.Set;
 @Slf4j
 @AllArgsConstructor
 public class UserService {
+
     //Requred variables
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
-
+    private final TokenRepo tokenRepo;
 
     public boolean createUser(User user){
         //Check if Such user already exists
@@ -30,6 +33,8 @@ public class UserService {
         }
 
         user.setActive(false);
+
+
         //Just to chekc if it the first user
         if(userRepo.findAll().size() == 0){
             //So it will be the ADMIN
@@ -39,6 +44,12 @@ public class UserService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
+
+        //Creating token
+        Token token = new Token(user);
+
+        tokenRepo.save(token);
+        log.info("--New token created : {} for user with id : {}",token.getToken(),user.getId());
 
         log.info("-- New user created - id:{}, email : {}",user.getId(),user.getEmail());
         return true;
@@ -52,5 +63,18 @@ public class UserService {
     public Set<Book> getTakenBooks(Principal principal){
         User user = findUserByPrincipal(principal);
         return user.getTakenBooks();
+    }
+
+    //-----------------USER ACTIVATION PART----------------
+    public Token getTokenByUser(User user){
+        return tokenRepo.findTokenByUser(user);
+    }
+    public Token getTokenByToken(String token){
+        return tokenRepo.findTokenByToken(token);
+    }
+
+    public void deleteTokenAfterActivation(Token token){
+        tokenRepo.delete(token);
+        log.info("--User has been succesfully authorised--");
     }
 }

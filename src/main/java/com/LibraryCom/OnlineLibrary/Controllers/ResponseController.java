@@ -16,7 +16,7 @@ import java.security.Principal;
 @AllArgsConstructor
 public class ResponseController {
 
-    //Rquired Variables
+    //Required Variables
     private final UserService userService;
     private final ResponseService responseService;
 

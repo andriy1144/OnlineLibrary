@@ -18,6 +18,10 @@
       Ім'я: <p th:text="${user.getName()}"> </p>
       Є учасником бібліотеки із: <p th:text="${#temporals.format(user.getDateOfCreating(),'dd-MM-yyyy')}"></p>
     </div>
+    <div class="alert alert-warning" style="margin-top: 20px" th:if="${user.isEnabled() == false}">
+      <strong>Ваш обліковий запис не є активованим.<br>
+        Щоб вам прийшло письом активації на ел. скриньку - <a href="/sendActivationsMessage">нажміть на це посилання</a></strong>
+    </div>
   </div>
 
   <!-- Book Info -->
