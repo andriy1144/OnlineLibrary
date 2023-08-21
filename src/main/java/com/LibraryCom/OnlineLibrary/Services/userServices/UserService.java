@@ -64,4 +64,17 @@ public class UserService {
         User user = findUserByPrincipal(principal);
         return user.getTakenBooks();
     }
+
+    //-----------------USER ACTIVATION PART----------------
+    public Token getTokenByUser(User user){
+        return tokenRepo.findTokenByUser(user);
+    }
+    public Token getTokenByToken(String token){
+        return tokenRepo.findTokenByToken(token);
+    }
+
+    public void deleteTokenAfterActivation(Token token){
+        tokenRepo.delete(token);
+        log.info("--User has been succesfully authorised--");
+    }
 }
