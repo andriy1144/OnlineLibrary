@@ -72,7 +72,10 @@ public class UserController {
                 "на OnlineLibrary.com \n + " +
                 "Посилання: " + token;
 
-        mailSenderService.sendMailMessage(user.getEmail(),text);
+        //Запускаємо потік , щоб користувач не чекав на сайті запуску email
+        Runnable sendingThread = () -> mailSenderService.sendMailMessage(user.getEmail(),text);
+        Thread t = new Thread(sendingThread,"SendingMail");
+        t.start();
 
         //Set attribute
         model.addAttribute("userEmail",user.getEmail());
