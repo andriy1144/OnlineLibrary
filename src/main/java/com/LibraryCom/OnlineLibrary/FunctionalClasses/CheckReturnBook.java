@@ -3,6 +3,7 @@ package com.LibraryCom.OnlineLibrary.FunctionalClasses;
 
 import com.LibraryCom.OnlineLibrary.Models.Book;
 import com.LibraryCom.OnlineLibrary.Repositories.BookRepo;
+import com.LibraryCom.OnlineLibrary.Services.MailSenderService.MailSenderService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +20,7 @@ import java.util.*;
 public class CheckReturnBook{
 
     private final BookRepo bookRepo;
-
+    private final MailSenderService mailSenderService;
 
     @Scheduled(fixedRate = 86_400_000)//86_400_000  - one day in ms:)
     public void CheckBookTimeLeft(){
@@ -38,6 +39,11 @@ public class CheckReturnBook{
             if(book.getDaysLeft() == 0) {
                 //Set it time min
                 book.setDaysLeft(-1L);
+            } else if (book.getDaysLeft() == 15 || book.getDaysLeft() == 5) {
+                Runnable sendingThread = () -> mailSenderService.sendWarnMailMessage(book);
+                Thread t = new Thread(sendingThread,"SendingMail");
+                t.start();
+                log.info("--Thread Launched--");
             }
             bookRepo.save(book);
         }
