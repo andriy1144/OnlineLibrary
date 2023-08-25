@@ -16,6 +16,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/homepage">Домашня сторінка</a>
                 </li>
+<!--                <li th:if="${user.getRoleSet().contains(Role.ADMIN_ROLE)}" class="nav-item">-->
+<!--                    <a class="nav-link" href="/adminPanel">Панель адміна</a>-->
+<!--                </li>-->
                 <li th:if="${user.getEmail() == null}" class="nav-item">
                     <a class="nav-link" href="/login">Ввійти</a>
                 </li>

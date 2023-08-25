@@ -1,5 +1,6 @@
 package com.LibraryCom.OnlineLibrary.Configurations;
 
+import com.LibraryCom.OnlineLibrary.Models.enums.Role;
 import com.LibraryCom.OnlineLibrary.Services.userServices.UserDetaiService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -27,11 +28,17 @@ public class SecurityConfig {
     //Main Configuration System
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(request ->
-                    request.requestMatchers("/","/blog/**","/book/**","/images/**","/registration","/static/**","/about","/search"
-                            ,"/libraryRespones")
-                            .permitAll().
-                            anyRequest().authenticated()
+        httpSecurity.authorizeHttpRequests(request -> {
+                            request.requestMatchers("/", "/blog/**", "/book/**", "/images/**", "/registration", "/static/**", "/about", "/search"
+                                            , "/libraryRespones")
+                                    .permitAll();
+
+                            request.requestMatchers("/adminPanel")
+                                    .hasAuthority(Role.ADMIN_ROLE.getAuthority());
+
+                            request.anyRequest().authenticated();
+                        }
+
                 )
                 .formLogin(
                         login ->

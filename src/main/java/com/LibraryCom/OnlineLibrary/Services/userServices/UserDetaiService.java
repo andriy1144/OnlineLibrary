@@ -1,6 +1,7 @@
 package com.LibraryCom.OnlineLibrary.Services.userServices;
 
 import com.LibraryCom.OnlineLibrary.Models.User;
+import com.LibraryCom.OnlineLibrary.Models.enums.Role;
 import com.LibraryCom.OnlineLibrary.Repositories.UserRepo;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
