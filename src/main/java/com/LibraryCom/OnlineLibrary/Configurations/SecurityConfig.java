@@ -33,7 +33,7 @@ public class SecurityConfig {
                                             , "/libraryRespones")
                                     .permitAll();
 
-                            request.requestMatchers("/adminPanel")
+                            request.requestMatchers("/admin/**")
                                     .hasAuthority(Role.ADMIN_ROLE.getAuthority());
 
                             request.anyRequest().authenticated();

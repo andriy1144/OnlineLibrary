@@ -30,10 +30,10 @@ function validateForm(el) {
 }
 
 function validateInput(el){
-    let smt = el.genre.value;
+    let smt = el.inputToValidate.value;
 
     if(smt === ""){
-        alert("--Введіть щось у поле добавлення жанру спершу ніж відправляти--")
+        alert("--Введіть щось у поле добавлення/пошуку спершу ніж відправляти--")
         return false;
     }else{
         return true;

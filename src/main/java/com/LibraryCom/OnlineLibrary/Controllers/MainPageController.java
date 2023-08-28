@@ -51,7 +51,7 @@ public class MainPageController {
                         GENRE SECTION
     */
     @PostMapping("/addNewGenre")
-    public String mainPagePost(@RequestParam(name = "genre") String genre, Model model) {
+    public String mainPagePost(@RequestParam(name = "inputToValidate") String genre, Model model) {
         if (!genre.equals("")) {
             if (bookService.addNewGenre(genre)) {
                 logger.info("--Новий жанр: {} створено успішно--",genre);

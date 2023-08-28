@@ -28,7 +28,7 @@
             <a class="nav-link" href="/homepage">Домашня сторінка</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/adminPanel}">Панель адміна</a>
+            <a class="nav-link" th:href="@{/admin/panel}">Панель адміна</a>
           </li>
           <li class="nav-item">
             <form th:action="@{/logout}" method="post">
@@ -42,28 +42,33 @@
   </nav>
 </header>
 
+
 <div class="container mt-5">
+  <form onsubmit="return validateInput(this)">
+    <input type="text" name="inputToValidate" id="myInput" placeholder="Пошук по номеру телефону...">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+    <button type="submit">Send</button>
+  </form>
   <table class="table">
-    <thead>
+    <thead id="table">
     <tr>
       <th scope="col">Індентифікатор</th>
       <th scope="col">Ім'я</th>
       <th scope="col">Номер телефону</th>
       <th scope="col">Ел. скринька</th>
-      <th scope="col">Домашня сторінка</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="user : ${Users}">
       <th scope="row" th:text="${user.getId()}"></th>
       <td th:text="${user.getName()}"></td>
+      <td th:text="${user.getPhoneNumber()}"></td>
       <td th:text="${user.getEmail()}"></td>
-      <td><a href="#" th:text="${user.getName()}"></a></td>
     </tr>
     </tbody>
   </table>
 </div>
 
-
+<script src="/static/js/validation.js" th:src="@{/static/js/validation.js}"></script>
 </body>
 </html>
