@@ -47,7 +47,7 @@
   <form onsubmit="return validateInput(this)">
     <input type="text" name="inputToValidate" id="myInput" placeholder="Пошук по номеру телефону...">
     <input type="hidden" name="_csrf" th:value="${_csrf.token}">
-    <button type="submit">Send</button>
+    <button type="submit">Пошук...</button>
   </form>
   <table class="table">
     <thead id="table">
@@ -59,12 +59,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user : ${Users}">
-      <th scope="row" th:text="${user.getId()}"></th>
-      <td th:text="${user.getName()}"></td>
-      <td th:text="${user.getPhoneNumber()}"></td>
-      <td th:text="${user.getEmail()}"></td>
-    </tr>
+      <tr th:each="user : ${Users}">
+          <th scope="row" th:text="${user.getId()}"></th>
+          <td th:text="${user.getName()}"></td>
+          <td th:text="${user.getPhoneNumber()}"></td>
+          <td th:text="${user.getEmail()}"></td>
+          <td>
+            <a style="color: chocolate" th:href="'/admin/user/' + ${user.getId()} + '/takenBooks'">Орендовані книги</a>
+          </td>
+        </tr>
     </tbody>
   </table>
 </div>

@@ -46,16 +46,8 @@ function validateAddBookForm(el){
     const descr = el.description.value;
     const feature = el.features.value;
 
-    const genreChekbox = el.genresList;
 
-    let isCheckedSomething = false;
-    for(let i = 0; i < genreChekbox.length; i++){
-        if(genreChekbox[i].checked === true){
-            isCheckedSomething = true
-        }
-    }
-
-    if(name === "" || author === "" || descr === "" || feature === "" || !isCheckedSomething){
+    if(name === "" || author === "" || descr === "" || feature === ""){
         alert("--Усі поля крім Картинок повині бути заповнені--")
         return false;
     }

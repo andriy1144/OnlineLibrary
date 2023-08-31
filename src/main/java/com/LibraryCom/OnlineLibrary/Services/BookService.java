@@ -129,4 +129,30 @@ public class BookService {
 
         return false;
     }
+
+    public boolean confirmBookReturn(Book book){
+        try {
+            //Getting user
+            User user = book.getUserTaker();
+
+            //Delete book from user library
+            user.getTakenBooks().remove(book);
+
+            userRepo.save(user);
+
+            //Reset books parameters
+            book.setUserTaker(null);
+
+            book.setDaysLeft(null);
+
+            bookRepo.save(book);
+
+            log.info("--Returning boog confirm went succesfull--");
+        }catch (Exception e){
+            log.error("--Returning book went wrong--");
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
