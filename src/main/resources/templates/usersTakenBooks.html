@@ -46,9 +46,9 @@
   <form onsubmit="return validateInput(this)">
     <input type="text" name="inputToValidate" id="myInput" placeholder="Пошук книги...">
     <input type="hidden" name="_csrf" th:value="${_csrf.token}">
-    <button type="submit">Пошук...</button>
+    <button style="margin-left: 20px" type="submit" class="btn btn-info">Пошук...</button>
   </form>
-  <table class="table">
+  <table class="table mt-5">
     <thead id="table">
     <tr>
       <th scope="col">Індентифікатор</th>
@@ -59,8 +59,8 @@
     </thead>
     <tbody>
     <tr th:each="book : ${Books}">
-      <th scope="row" th:text="${book.getId()}"></th>
-      <td th:text="${book.getName()}"></td>
+      <th style="color: greenyellow" scope="row" th:text="${book.getId()}"></th>
+      <td style="text-decoration: underline" th:text="${book.getName()}"></td>
       <td th:if="${book.getDaysLeft() <= 0}"><strong style="color: red">Очікується повернення</strong></td>
       <td th:unless="${book.getDaysLeft() <= 0}" th:text="${book.getDaysLeft()}"></td>
       <td><a th:href="'/admin/returnBook/' + ${book.getId()}">Підтвердити повернення!</a></td>

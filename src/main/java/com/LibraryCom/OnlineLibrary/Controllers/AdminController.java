@@ -60,9 +60,8 @@ public class AdminController {
 
         Long userId = book.getUserTaker().getId();
 
-        if(book != null){
-            bookService.confirmBookReturn(book);
-        }
+        bookService.confirmBookReturn(book);
+
         //... Доробити у майбутньому (покращити)
         return "redirect:/admin/user/" + userId + "/takenBooks";
     }
