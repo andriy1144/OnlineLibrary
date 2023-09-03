@@ -3,7 +3,6 @@ package com.LibraryCom.OnlineLibrary.Services;
 import com.LibraryCom.OnlineLibrary.Models.Book;
 import com.LibraryCom.OnlineLibrary.Models.Genre;
 import com.LibraryCom.OnlineLibrary.Models.Images;
-import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.LibraryResponse;
 import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Repositories.BookRepo;
 import com.LibraryCom.OnlineLibrary.Repositories.GenreRepo;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -130,7 +128,7 @@ public class BookService {
         return false;
     }
 
-    public boolean confirmBookReturn(Book book){
+    public void confirmBookReturn(Book book){
         try {
             //Getting user
             User user = book.getUserTaker();
@@ -151,8 +149,6 @@ public class BookService {
         }catch (Exception e){
             log.error("--Returning book went wrong--");
             e.printStackTrace();
-            return false;
         }
-        return true;
     }
 }
