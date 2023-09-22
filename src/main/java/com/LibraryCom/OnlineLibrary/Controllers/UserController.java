@@ -1,5 +1,6 @@
 package com.LibraryCom.OnlineLibrary.Controllers;
 
+import com.LibraryCom.OnlineLibrary.FunctionalClasses.TokensType;
 import com.LibraryCom.OnlineLibrary.Models.Token;
 import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Repositories.TokenRepo;
@@ -65,7 +66,7 @@ public class UserController {
 
         //Sending message
         //Getting token
-        String token = "http://localhost:8081/confirmAccount?token="+ userService.getTokenByUser(user).getToken();
+        String token = "http://localhost:8080/confirmAccount?token="+ userService.getTokenByUser(user,TokensType.CONFIRM_ACCOUNT).getToken();
 
 
         String text = "Будь-ласка перейдіть по цьому посиланню для активації вашого облікового запису " +
@@ -85,7 +86,7 @@ public class UserController {
 
     @GetMapping("/confirmAccount")
     public String confirmAccount(@RequestParam(name = "token") String token){
-        Token userToken = userService.getTokenByToken(token);
+        Token userToken = userService.getTokenByToken(token, TokensType.CONFIRM_ACCOUNT);
         if(userToken != null){
             User user = userToken.getUser();
             //Set true and save user

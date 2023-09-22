@@ -1,5 +1,6 @@
 package com.LibraryCom.OnlineLibrary.Services.userServices;
 
+import com.LibraryCom.OnlineLibrary.FunctionalClasses.TokensType;
 import com.LibraryCom.OnlineLibrary.Models.Book;
 import com.LibraryCom.OnlineLibrary.Models.Token;
 import com.LibraryCom.OnlineLibrary.Models.User;
@@ -46,7 +47,7 @@ public class UserService {
         userRepo.save(user);
 
         //Creating token
-        Token token = new Token(user);
+        Token token = new Token(user, TokensType.CONFIRM_ACCOUNT);
 
         tokenRepo.save(token);
         log.info("--New token created : {} for user with id : {}",token.getToken(),user.getId());
@@ -66,11 +67,11 @@ public class UserService {
     }
 
     //-----------------USER ACTIVATION PART----------------
-    public Token getTokenByUser(User user){
-        return tokenRepo.findTokenByUser(user);
+    public Token getTokenByUser(User user,TokensType type){
+        return tokenRepo.findTokenByUserAndTokensType(user,type);
     }
-    public Token getTokenByToken(String token){
-        return tokenRepo.findTokenByToken(token);
+    public Token getTokenByToken(String token,TokensType type){
+        return tokenRepo.findTokenByTokenAndTokensType(token,type);
     }
 
     public void deleteTokenAfterActivation(Token token){

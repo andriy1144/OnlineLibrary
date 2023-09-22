@@ -1,5 +1,6 @@
 package com.LibraryCom.OnlineLibrary.Models;
 
+import com.LibraryCom.OnlineLibrary.FunctionalClasses.TokensType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,14 +20,18 @@ public class Token {
     @Column(name = "token")
     private String token;
 
+    @Column(name = "type")
+    private TokensType tokensType;
+
     @OneToOne(targetEntity = User.class,fetch = FetchType.EAGER)
     private User user;
 
     public Token(){
 
     }
-    public Token(User user){
+    public Token(User user, TokensType type){
         this.user = user;
         token = UUID.randomUUID().toString();
+        this.tokensType = type;
     }
 }
