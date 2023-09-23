@@ -8,6 +8,7 @@ import com.LibraryCom.OnlineLibrary.Models.enums.Role;
 import com.LibraryCom.OnlineLibrary.Repositories.TokenRepo;
 import com.LibraryCom.OnlineLibrary.Repositories.UserRepo;
 import lombok.AllArgsConstructor;
+import lombok.experimental.Tolerate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -68,7 +69,9 @@ public class UserService {
 
     //-----------------USER ACTIVATION PART----------------
     public Token getTokenByUser(User user,TokensType type){
-        return tokenRepo.findTokenByUserAndTokensType(user,type);
+        Token token =  tokenRepo.findTokenByUserAndTokensType(user,type);
+        System.out.println(token);
+        return token;
     }
     public Token getTokenByToken(String token,TokensType type){
         return tokenRepo.findTokenByTokenAndTokensType(token,type);

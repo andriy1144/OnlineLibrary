@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Return Book Confirm</title>
+</head>
+<body>
+  <div class="container mt-5" th:object="${book}">
+    <h3>Інформація про книгу для повернення: </h3>
+    <label for="name">Назва: </label>
+    <input type="button" id="name" th:value="${book.getName()}">
+
+    <label for="author">Автор: </label>
+    <input type="button" id="author" th:value="${book.getAuthor()}">
+
+    <form th:action="'/admin/confirmReturn/'+ ${book.getUserTaker().getId()}" method="post">
+      <label for="code">Введіть код підтвердженн: </label>
+      <input type="text" id="code" name="code">
+
+      <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+      <input type="submit" value="Надіслати">
+    </form>
+  </div>
+</body>
+</html>

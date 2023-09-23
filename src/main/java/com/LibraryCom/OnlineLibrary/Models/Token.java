@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.util.Random;
 import java.util.UUID;
 
 @Entity
@@ -31,7 +32,14 @@ public class Token {
     }
     public Token(User user, TokensType type){
         this.user = user;
-        token = UUID.randomUUID().toString();
+        if(type.equals(TokensType.CONFIRM_ACCOUNT)){
+            token = UUID.randomUUID().toString();
+        }else{
+            int minValue = 1000;
+            int maxValue = 900;
+            int randNum = new Random().nextInt(maxValue);
+            token = Integer.toString(minValue + randNum);
+        }
         this.tokensType = type;
     }
 }
