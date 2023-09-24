@@ -13,9 +13,13 @@
     <label for="author">Автор: </label>
     <input type="button" id="author" th:value="${book.getAuthor()}">
 
-    <form th:action="'/admin/confirmReturn/'+ ${book.getUserTaker().getId()}" method="post">
+    <form th:action="'/admin/confirmReturn/'+ ${book.getId()}" method="post">
       <label for="code">Введіть код підтвердженн: </label>
       <input type="text" id="code" name="code">
+
+      <div style="color:red;" th:text="${errorMessage}">
+
+      </div>
 
       <input type="hidden" name="_csrf" th:value="${_csrf.token}">
       <input type="submit" value="Надіслати">

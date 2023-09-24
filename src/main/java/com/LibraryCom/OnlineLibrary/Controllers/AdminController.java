@@ -82,4 +82,24 @@ public class AdminController {
 
         return "returnConfirm";
     }
+
+    @PostMapping("/confirmReturn/{bookId}")
+    public String confirm(@RequestParam(name = "code") String code,
+                          @PathVariable(name = "bookId") Long id,
+                          Model model){
+        Token token = userService.getTokenByToken(code,TokensType.CONFIRM_RETURN);
+        Book book = bookService.getBookById(id);
+        if(token == null){
+            model.addAttribute("errorMessage","Такого коду не існує");
+            model.addAttribute("book",book);
+            return "returnConfirm";
+        }
+
+        bookService.confirmBookReturn(book);
+        Long userId = token.getUser().getId();
+        tokenRepo.delete(token);
+
+        return "redirect:/admin/user/" + userId + "/takenBooks";
+    }
+
 }
