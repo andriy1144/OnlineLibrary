@@ -1,7 +1,6 @@
 package com.LibraryCom.OnlineLibrary.Controllers;
 
 import com.LibraryCom.OnlineLibrary.Models.Book;
-import com.LibraryCom.OnlineLibrary.Models.Genre;
 import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Models.enums.Role;
 import com.LibraryCom.OnlineLibrary.Services.BookService;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller

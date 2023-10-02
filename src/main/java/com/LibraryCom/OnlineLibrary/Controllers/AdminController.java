@@ -23,16 +23,12 @@ public class AdminController {
 
     @Autowired
     private UserRepo userRepo;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private MailSenderService mailSenderService;
-
     @Autowired
     private BookService bookService;
-
     @Autowired
     private TokenRepo tokenRepo;
 

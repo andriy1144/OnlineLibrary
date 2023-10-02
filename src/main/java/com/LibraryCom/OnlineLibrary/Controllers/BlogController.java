@@ -1,9 +1,7 @@
 package com.LibraryCom.OnlineLibrary.Controllers;
 
 import com.LibraryCom.OnlineLibrary.Models.Posts;
-import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Services.PostService;
-import com.LibraryCom.OnlineLibrary.Services.userServices.UserService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +20,6 @@ public class BlogController {
     //Required variables
     private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
     private final PostService postService;
-    private final UserService userService;
-
     //Controllers
     @GetMapping("/")
     public String blogPage(Model model, Principal principal){
@@ -40,13 +36,17 @@ public class BlogController {
     }
 
     @PostMapping("/savePost")
-    public String postAddBlogPage(Posts posts, @RequestParam(name = "files") MultipartFile[] files){
+    public String postAddBlogPage(Posts posts,
+                                  @RequestParam(name = "files") MultipartFile[] files,
+                                  Model model){
 
         try {
             postService.savePost(posts, files);
         }catch(Exception e){
             logger.error("--Error saving post: Error : {} --",e);
-            //Something back
+
+            model.addAttribute("errorMessage","Помилка збереження посту!");
+            return "ErrorPage";
         }
         return "redirect:/blog/";
     }
@@ -60,7 +60,8 @@ public class BlogController {
         if(post != null){
             model.addAttribute("post",post);
         }else{
-            ///Something...
+            model.addAttribute("errorMessage","Такої сторінки не існує!");
+            return "ErrorPage";
         }
         return "blogPageView";
     }

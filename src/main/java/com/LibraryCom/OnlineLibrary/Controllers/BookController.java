@@ -1,11 +1,8 @@
 package com.LibraryCom.OnlineLibrary.Controllers;
 
 import com.LibraryCom.OnlineLibrary.Models.Book;
-import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.BookResponce;
-import com.LibraryCom.OnlineLibrary.Models.ResponcesEntities.LibraryResponse;
 import com.LibraryCom.OnlineLibrary.Models.User;
 import com.LibraryCom.OnlineLibrary.Services.BookService;
-import com.LibraryCom.OnlineLibrary.Services.ResponseService;
 import com.LibraryCom.OnlineLibrary.Services.userServices.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +22,7 @@ public class BookController {
     //Required variables
     private final BookService bookService;
     private final UserService userService;
-    private final ResponseService responseService;
+
     //Showing the addBookPage.html
     @GetMapping("/addNewBook")
     public String addBookPage(Model model, Principal principal){
