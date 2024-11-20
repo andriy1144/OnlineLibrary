@@ -1,6 +1,5 @@
 package com.LibraryCom.OnlineLibrary;
 
-import com.LibraryCom.OnlineLibrary.FunctionalClasses.CheckReturnBook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +22,6 @@ public class OnlineLibraryApplication {
 		SpringApplication.run(OnlineLibraryApplication.class, args);
 
 		logger.info("--Databases has been succesfuly conected--");
-
 	}
 
 }
